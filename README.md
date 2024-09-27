@@ -3,3 +3,5 @@ This is the main repository for AML course for Master 2 students in AMS of ITC. 
 
 - Main webpage: [https://hassothea.github.io/Advanced-Machine-Learning-ITC/](https://hassothea.github.io/Advanced-Machine-Learning-ITC/)
 
+<iframe width="100%" height="80%" src="https://hassothea.github.io/Advanced-Machine-Learning-ITC/index.html" frameborder="0" marginwidth="0" marginheight="0" style="border: none; max-width:100%; max-height:80%" allowfullscreen webkitallowfullscreen mozallowfullscreen msallowfullscreen> </iframe>
+
