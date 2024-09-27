@@ -15,63 +15,11 @@ title-block-banner: true
 linestretch: 2.25
 ---
 
-# Introduction to AML course
+# Introduction
 
-Welcome to the Advanced Machine Learning course! This course is designed to provide an in-depth understanding of advanced topics in machine learning, including data comprehension techniques, various advanced machine learning methods, optimization approaches, what to watch out when working using each machine learning method, and more. By the end of this course, you will have a solid grasp of machine learning techniques and be able to apply them to real-world problems.
+Welcome to the **Advanced Machine Learning** course! This course is designed to provide an in-depth understanding of advanced topics in machine learning, including data comprehension, advanced machine learning methods, optimization approaches, what to watch out when working with each machine learning model, and more. By the end of this course, you will have a solid grasp of various types of datasets, machine learning techniques and be able to apply them to real-world problems.
 
-## Course Sections
-
-The following table will be updated according to the course progress.
-
-| Date | Slide | TP | Remark |
-|---------|:-----|------:|:------:|
-|  --/--/--   | [Introduction - NBC - LDA, QDA & RDA](https://hassothea.github.io/Advanced-Machine-Learning-ITC/courses/Intro_NBC_LDA_QDA.html) | [TP1](https://hassothea.github.io/Advanced-Machine-Learning-ITC/TPs/Intro_NBC_LDA_QDA.ipynb) | - |
-
-
-<!--
-1. Introduction to Advanced Machine Learning
-    - 
-2. Bayesian Neural Networks
-3. Optimization Approaches
-4. Transfer Learning
-5. Advanced Machine Learning Models
-6. Applications in Actuarial Science
-7. Applications in Transportation Systems
-8. Project and Case Studies
-9. Resources and Further Reading
-
-
-## Introduction to Advanced Machine Learning
-
-In this section, we will cover the basics of advanced machine learning, including an overview of the topics we will explore throughout the course.
-
-## Bayesian Neural Networks
-
-This section will delve into Bayesian neural networks, discussing their principles, advantages, and how to implement them.
-
-## Optimization Approaches
-
-Here, we will explore various optimization techniques used in machine learning, including gradient descent, stochastic optimization, and more.
-
-## Transfer Learning
-
-This section will cover the concept of transfer learning, its applications, and how to leverage pre-trained models for new tasks.
-
-## Advanced Machine Learning Models
-
-We will discuss advanced machine learning models such as ensemble methods, deep reinforcement learning, and more.
-
-## Applications in Actuarial Science
-
-This section will focus on how advanced machine learning techniques can be applied in actuarial science for risk assessment, pricing, and other tasks.
-
-## Applications in Transportation Systems
-
-We will explore the use of machine learning in transportation systems, including traffic prediction, route optimization, and autonomous vehicles.
-
--->
-
-## Course Criteria
+# Course Criteria
 
 | **`Criteria`** | **`Percentage`** |
 |:---------|:----------:|
@@ -81,13 +29,27 @@ We will explore the use of machine learning in transportation systems, including
 |Final Exam| 20% |
 |Final Project & Presentation| 30% |
 
-> Programming: [![](./img/python.png){width=30px style="position: relative; bottom: 0px"}](https://www.python.org/){target="_blank"} `Python` ([![](./img/jupyter.png){width=25px style="position: relative; bottom: 0px"}](https://docs.jupyter.org/en/latest/){target="_blank"}, [![](./img/sklearn.png){width=40px style="position: relative; bottom: 0px"}](https://scikit-learn.org/stable/){target="_blank"}, [![](./img/pytorch.png){width=50px style="position: relative; bottom: 0px"}](https://pytorch.org/){target="_blank"},  [![](./img/colab.png){width=30px style="position: relative; bottom: 0px"}](https://colab.research.google.com/){target="_blank"}, ...)
+> Programming: [![](./img/python.png){width=30px style="position: relative; bottom: 0px"}](https://www.python.org/){target="_blank"} `Python` with the following main tools and modules: 
 
-## Project and Case Studies
+- [![](./img/jupyter.png){width=25px style="position: relative; bottom: 0px"} Jupyter Notebook](https://docs.jupyter.org/en/latest/){target="_blank"} 
+- [![](./img/colab.png){width=30px style="position: relative; bottom: 0px"} Google colab](https://colab.research.google.com/){target="_blank"}
+- [![](./img/sklearn.png){width=40px style="position: relative; bottom: 0px"} Scikit-learn](https://scikit-learn.org/stable/){target="_blank"}
+- [![](./img/pytorch.png){width=50px style="position: relative; bottom: 0px"} Pytorch](https://pytorch.org/){target="_blank"} ...
 
-In this section, we will work on practical projects and case studies to apply the concepts learned throughout the course.
+# Course Sections
 
-## Resources and Further Reading
+| **Note**: The following table of contents will be progressively updated according to the course advancement.
+
+
+| Date | Slide |  TP | Remark |
+|:----:|:-----:|:---:|:------:|
+|  --/--/--   | [Introduction - NBC - LDA, QDA & RDA](https://hassothea.github.io/Advanced-Machine-Learning-ITC/courses/Intro_NBC_LDA_QDA.html) | [TP1](https://hassothea.github.io/Advanced-Machine-Learning-ITC/TPs/Intro_NBC_LDA_QDA.ipynb) | - |
+
+# Midterms, Exams and Projects
+
+In this section, you will find all the information related to the midterms, exams and projects including instructions, starting dates and the deadlines.
+
+# Resources and Further Reading
 
 Here, you will find additional resources, including books, research papers, and online courses, to further your understanding of advanced machine learning.
 
