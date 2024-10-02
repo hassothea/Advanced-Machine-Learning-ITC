@@ -169,7 +169,7 @@ window.Quarto = {
 <p>This practical session (TP) aims to familiarize you with the key assumptions of each introduced model. The first section is designed to test your understanding of the data and models, while the second section focuses on applying your knowledge to real-world datasets. Please read the instructions carefully and try to complete the tasks independently. If you get stuck, don’t hesitate to ask for help. Good luck!</p>
 </blockquote>
 <blockquote class="blockquote">
-<p>Please download the <code>Jupyter Notebook</code> by clicking <a href="">here</a>. The session will cover the following sections:</p>
+<p>Please download the <code>Jupyter Notebook</code> by clicking <a href="https://hassothea.github.io/Advanced-Machine-Learning-ITC/TPs/TP1_NBC_LDA_QDA_RDA.ipynb" target="_blank">here</a>. The session will cover the following sections:</p>
 </blockquote>
 <blockquote class="blockquote">
 <ol type="1">
@@ -205,7 +205,7 @@ window.Quarto = {
 </ul></li>
 </ul>
 <p><em>I set an example below, you can do it differently.</em></p>
-<div id="fbe16406" class="cell" data-execution_count="1">
+<div id="db32122e" class="cell" data-execution_count="1">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
@@ -286,7 +286,7 @@ window.Quarto = {
 <section id="balanced-datasets" class="level3">
 <h3 class="anchored" data-anchor-id="balanced-datasets">1.1. Balanced datasets</h3>
 <p><strong>A.</strong> With <span class="math inline">\((n,d,M)=(700,2,3)\)</span> fixed and three different options for method in the list <code>['nbc', 'lda', 'qda']</code>, use the function above to generate three different datasets: <code>(X_nbc, y_nbc)</code>, <code>(X_lda, y_lda)</code>, and <code>(X_qda, y_qda)</code>, where <code>X</code> and <code>y</code> are different input-output pairs. An example is given below.</p>
-<div id="49b4d894" class="cell" data-execution_count="2">
+<div id="8bae56e9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameters</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n, d, M <span class="op">=</span> <span class="dv">700</span>, <span class="dv">2</span>, <span class="dv">3</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
@@ -299,10 +299,10 @@ window.Quarto = {
 <hr>
 <p><br></p>
 <p><strong>B.</strong> Write the code to visualize the first <span class="math inline">\(500\)</span> observations from each dataset using scatterplots colored according to the classes of the target <code>y</code>. The remaining <span class="math inline">\(200\)</span> observations are treated as the testing data. Your result should look similar to the figures below.</p>
-<div id="6652bf0a" class="cell" data-execution_count="3">
+<div id="428e8344" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="441e8d01" class="cell" data-message="false" data-execution_count="4">
+<div id="afbb93a2" class="cell" data-message="false" data-execution_count="4">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -314,10 +314,10 @@ window.Quarto = {
 <hr>
 <p><strong>C.</strong> For now, work with <code>(X_nbc, y_nbc)</code> dataset.</p>
 <p><strong>a.</strong> Train <code>NBC</code>, <code>LDA</code> and <code>QDA</code> on the first <span class="math inline">\(500\)</span> observations. Report the <em>accuracies</em>, <em>precision</em>, <em>recall</em> and <em>f1-scaore</em> of the three models on the remaining <span class="math inline">\(200\)</span> testing points. You should obtain the results as illustrated below.</p>
-<div id="502e9e4a" class="cell" data-execution_count="5">
+<div id="e0c09f49" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="811a40ab" class="cell" data-execution_count="6">
+<div id="92e031b3" class="cell" data-execution_count="6">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -334,7 +334,7 @@ QDA  0.820832   0.818865  0.814520</code></pre>
 </div>
 <p><br></p>
 <p><strong>b.</strong> Draw the decision boundary with the testing data of the three models on the <code>(X_nbc, y_nbc)</code> dataset. An example of a function for drawing such a boundary is given below.</p>
-<div id="f2579fbd" class="cell" data-execution_count="7">
+<div id="13fd4d41" class="cell" data-execution_count="7">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> DecisionBoundaryDisplay</span>
@@ -365,10 +365,10 @@ QDA  0.820832   0.818865  0.814520</code></pre>
 <span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<div id="ff47fb96" class="cell" data-execution_count="8">
+<div id="16627760" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do: apply to the dataset</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="298597be" class="cell" data-execution_count="9">
+<div id="d8b0a6b5" class="cell" data-execution_count="9">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -383,10 +383,10 @@ QDA  0.820832   0.818865  0.814520</code></pre>
 <ul>
 <li>For <code>(X_lda, y_lda)</code>, you should produce the following result.</li>
 </ul>
-<div id="9a0b96ef" class="cell" data-execution_count="10">
+<div id="cfc8294e" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="63ae55b9" class="cell" data-execution_count="11">
+<div id="e02a30ad" class="cell" data-execution_count="11">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -412,10 +412,10 @@ QDA  0.980639   0.978421  0.979373</code></pre>
 <ul>
 <li>For <code>(X_qda, y_qda)</code>, your result should be similar to the result below.</li>
 </ul>
-<div id="26a96dcc" class="cell" data-execution_count="12">
+<div id="5789ae60" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="2cc3212b" class="cell" data-execution_count="13">
+<div id="5d9be9d8" class="cell" data-execution_count="13">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -450,7 +450,7 @@ QDA  0.948944   0.338166  0.950155</code></pre>
 <p>Now, we will work with imbalanced simulated datasets. The goal is to identify problems associated with imbalanced datasets and to propose possible solutions we have studied so far.</p>
 <p><br></p>
 <p><strong>A.</strong> With the same options as in the balanced case, but adding an additional option of <code>class_weights = [0.2, 0.15, 0.65]</code>, generate other three imbalanced datasets. An example is provided below.</p>
-<div id="e0690365" class="cell" data-execution_count="14">
+<div id="1db86297" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>weights <span class="op">=</span> [<span class="fl">0.2</span>, <span class="fl">0.15</span>, <span class="fl">0.65</span>] <span class="co">#[0.2, 0.15, 0.65]</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>) </span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>X_nbc, y_nbc <span class="op">=</span> simulateClassificationData(n, d, M, method<span class="op">=</span><span class="st">"nbc"</span>, class_weights<span class="op">=</span>weights)</span>
@@ -459,10 +459,10 @@ QDA  0.948944   0.338166  0.950155</code></pre>
 </div>
 <p><br></p>
 <p><strong>a.</strong> Recreate the countplots and scatterplots for the three simulated datasets as ilustrated below.</p>
-<div id="44b22800" class="cell" data-execution_count="15">
+<div id="6627e399" class="cell" data-execution_count="15">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="8266f8f9" class="cell" data-message="false" data-execution_count="16">
+<div id="8c393f36" class="cell" data-message="false" data-execution_count="16">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -480,10 +480,10 @@ QDA  0.948944   0.338166  0.950155</code></pre>
 </div>
 <hr>
 <p><strong>b.</strong> Recreate the following performance metrics on imbalanced <code>nbc</code> dataset.</p>
-<div id="adade04e" class="cell" data-execution_count="17">
+<div id="5d739adf" class="cell" data-execution_count="17">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="f0b2ea51" class="cell" data-execution_count="18">
+<div id="119ea559" class="cell" data-execution_count="18">
 <div class="cell-output cell-output-display">
 <div>
 <figure class="figure">
@@ -505,7 +505,7 @@ QDA  0.663761   0.689268  0.674789</code></pre>
 </blockquote>
 <hr>
 <p><strong>B.</strong> Do the same (compute these matrices) for the other two imbalanced datasets.</p>
-<div id="33a4fe22" class="cell" data-execution_count="19">
+<div id="442e2c64" class="cell" data-execution_count="19">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
@@ -523,14 +523,14 @@ QDA  0.663761   0.689268  0.674789</code></pre>
 <li><code>means</code>: list of per-class means. It should also be estimated if it’s <code>None</code>. <br></li>
 </ul>
 <p><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>This function computes the prediction of <code>X_test</code> using <code>RDA</code> at regularized value <span class="math inline">\(\alpha_0\)</span>. Hint: using the implementation on <a href="https://hassothea.github.io/Advanced-Machine-Learning-ITC/courses/Intro_NBC_LDA_QDA.html#/implementation-of-qda" target="_blank">slide 37</a>.</p>
-<div id="8fbfabff" class="cell" data-execution_count="20">
+<div id="d7160d6c" class="cell" data-execution_count="20">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> deltaRDA(X, y, X_test, alpha <span class="op">=</span> <span class="fl">0.5</span>, lda_cov <span class="op">=</span> <span class="va">None</span>, qda_cov <span class="op">=</span> <span class="va">None</span>, means <span class="op">=</span> <span class="va">None</span>):</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <hr>
 <p><br></p>
 <p><strong>b.</strong> Compute the confusion matrix and all the performance matrices on the test data using <code>deltaRDA</code> at <span class="math inline">\(\alpha=0.5\)</span> as defined above.</p>
-<div id="f5b91b84" class="cell" data-execution_count="22">
+<div id="2bd57854" class="cell" data-layout-align="center" data-execution_count="22">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># making prediction using delta(x)</span></span>
@@ -561,9 +561,9 @@ QDA  0.663761   0.689268  0.674789</code></pre>
 <span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(res_nbc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="TP1_NBC_LDA_QDA_RDA_files/figure-html/cell-23-output-1.png" data-fig-pos="center" width="356" height="381" class="figure-img"></p>
+<p><img src="TP1_NBC_LDA_QDA_RDA_files/figure-html/cell-23-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="356" height="381"></p>
 </figure>
 </div>
 </div>
@@ -578,7 +578,7 @@ RDA  0.726954   0.667442  0.686269      0.69</code></pre>
 </blockquote>
 <hr>
 <p><strong>c.</strong> Split your training data into <span class="math inline">\(K\)</span> folds namely: <span class="math inline">\(F_1,F_2,\dots,F_K\)</span>. Let <span class="math inline">\(F_{-k}\)</span> represent all the training data except for the <span class="math inline">\(k\)</span>th fold. For any fixed <span class="math inline">\(\alpha\)</span>, write a function <code>cvRDA(alpha)</code> that returns the average F<span class="math inline">\(_1\)</span>-score over each fold <span class="math inline">\(F_k\)</span> using model built on <span class="math inline">\(F_{-k}\)</span>. One way to do this is shown below.</p>
-<div id="af312451" class="cell" data-execution_count="23">
+<div id="e546018d" class="cell" data-execution_count="23">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="dv">5</span>          <span class="co"># choose K = 5</span></span>
@@ -607,20 +607,20 @@ RDA  0.726954   0.667442  0.686269      0.69</code></pre>
 </div>
 <p><br></p>
 <p><strong>d.</strong> Choose a grid for <span class="math inline">\(\alpha\)</span>, for example, <code>G=np.linspace(0,1,100)</code> which generates uniform grid of <span class="math inline">\(100\)</span> values on interval <span class="math inline">\([0,1]\)</span>. Now, write <code>Python</code> code that searches for <span class="math inline">\(\alpha^*\)</span> on the grid <span class="math inline">\(G\)</span> with largest cross-validation F<span class="math inline">\(_1\)</span>-score. Plot the the following graph of <span class="math inline">\((x,y)=(\alpha, \text{CVError}(\alpha))\)</span>.</p>
-<div id="57cca056" class="cell" data-execution_count="24">
+<div id="d020471d" class="cell" data-layout-align="center" data-execution_count="24">
 <div class="cell-output cell-output-stdout">
 <pre><code>* Optimal alpha: [0.263 0.293 0.303]</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="TP1_NBC_LDA_QDA_RDA_files/figure-html/cell-25-output-2.png" width="601" height="455" class="figure-img"></p>
+<p><img src="TP1_NBC_LDA_QDA_RDA_files/figure-html/cell-25-output-2.png" class="quarto-figure quarto-figure-center figure-img" width="601" height="455"></p>
 </figure>
 </div>
 </div>
 </div>
 <p><strong>e.</strong> Build the <code>RDA</code> model with the observed optimal <span class="math inline">\(\alpha^*\)</span> using all <span class="math inline">\(500\)</span> training data points. Report the performance metrics on the testing data. Conclude your findings.</p>
-<div id="f51831fb" class="cell" data-execution_count="25">
+<div id="dae9106f" class="cell" data-layout-align="center" data-execution_count="25">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> {alpha: deltaRDA(X<span class="op">=</span>X_train,</span>
@@ -658,14 +658,14 @@ RDA  0.726954   0.667442  0.686269      0.69</code></pre>
 2  0.303     0.720</code></pre>
 </div>
 <div class="cell-output cell-output-display">
-<div>
+<div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="TP1_NBC_LDA_QDA_RDA_files/figure-html/cell-26-output-2.png" data-fig-pos="center" width="790" height="299" class="figure-img"></p>
+<p><img src="TP1_NBC_LDA_QDA_RDA_files/figure-html/cell-26-output-2.png" class="quarto-figure quarto-figure-center figure-img" width="790" height="299"></p>
 </figure>
 </div>
 </div>
 </div>
-<div id="3c0a3686" class="cell" data-execution_count="26">
+<div id="e85f2316" class="cell" data-execution_count="26">
 <details class="code-fold">
 <summary>Code</summary>
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"* Other metrics:"</span>)</span>
@@ -696,11 +696,11 @@ RDA  0.726954   0.667442  0.686269      0.69</code></pre>
 <blockquote class="blockquote">
 <p>In this section, you will reproduce the results shown in the course with <code>Spam</code> dataset and explore the <a href="https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset">Heart Disease Dataset</a>. We can download <code>Spam</code> data using the code below:</p>
 </blockquote>
-<div id="7e2cc1d7" class="cell" data-execution_count="27">
+<div id="65f0ee58" class="cell" data-execution_count="27">
 <div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>path_spam <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/hassothea/MLcourses/refs/heads/main/data/spam.txt"</span></span>
 <span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>spam <span class="op">=</span> pd.read_csv(path_spam, index_col<span class="op">=</span><span class="dv">0</span>, sep<span class="op">=</span><span class="st">" "</span>)</span>
 <span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>spam.sample(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="35">
+<div class="cell-output cell-output-display" data-execution_count="72">
 <div>
 
 
@@ -883,11 +883,17 @@ RDA  0.726954   0.667442  0.686269      0.69</code></pre>
 </div>
 </div>
 </div>
+<p><br></p>
 <p><strong>A.</strong> Perform descriptive analysis on the datasets: aim for connection between inputs and the target.</p>
 <p><strong>B.</strong> Split and built model based on your analysis in the previous step.</p>
 <p><strong>C.</strong> Report the results on the testing data.</p>
 <hr>
 </section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<p><span class="math inline">\(^{\text{📚}}\)</span> <a href="https://www.sas.upenn.edu/~fdiebold/NoHesitations/BookAdvanced.pdf">Chapter 4, <em>Introduction to Statistical Learning with R</em>, James et al.&nbsp;(2021).</a>. <br> <span class="math inline">\(^{\text{📚}}\)</span> <a href="https://www.sas.upenn.edu/~fdiebold/NoHesitations/BookAdvanced.pdf">Chapter 2, <em>The Elements of Statistical Learning</em>, Hastie et al.&nbsp;(2008).</a>. <br> <span class="math inline">\(^{\text{📚}}\)</span> <a href="http://www.leg.ufpr.br/~eferreira/CE064/Regularized%20Discriminant%20Analysis.pdf">Friedman (1989)</a>. <br> <span class="math inline">\(^{\text{📚}}\)</span> <a href="https://en.wikipedia.org/wiki/Cross-validation_(statistics)#:~:text=Cross%2Dvalidation%20includes%20resampling%20and,model%20will%20perform%20in%20practice." target="_blank">Cross-Validation technique</a>. <br> <span class="math inline">\(^{\text{📚}}\)</span> <a href="https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset">Heart Disease Dataset</a>.</p>
+<hr>
 </section>
 
 
