@@ -1965,10 +1965,10 @@ if (outputEl) {{
 </div>
 <div class="callout-content">
 <p><span class="math display">\[\begin{align*}
-\mathbb{P}(Y=k|X=\text{x})=&amp;\max_{1\leq m\leq M}\mathbb{P}(Y=m|X=\text{x})\\
-=&amp;\max_{1\leq m\leq M} \mathbb{P}(Y=m)\mathbb{P}(X=\text{x}|Y=m)\\
-=&amp;\max_{1\leq m\leq M} \log\left(\mathbb{P}(Y=m)\mathbb{P}(X=\text{x}|Y=m)\right)\\
-=&amp;\max_{1\leq m\leq M} \delta_m(\text{x}),
+\mathbb{P}(Y=k|X=\text{x})=&amp;\arg\max_{1\leq m\leq M}\mathbb{P}(Y=m|X=\text{x})\\
+=&amp;\arg\max_{1\leq m\leq M} \mathbb{P}(Y=m)\mathbb{P}(X=\text{x}|Y=m)\\
+=&amp;\arg\max_{1\leq m\leq M} \log\left(\mathbb{P}(Y=m)\mathbb{P}(X=\text{x}|Y=m)\right)\\
+=&amp;\arg\max_{1\leq m\leq M} \delta_m(\text{x}),
 \end{align*}\]</span> where <span class="math inline">\(\delta_m(\text{x})\)</span> measures the association of the input <span class="math inline">\(\text{x}\)</span> to the class <span class="math inline">\(k\)</span> and is defined by <span class="math display">\[\delta_m(\text{x})=\color{green}{\log(\pi_m)}-\color{blue}{\log(|\Sigma_m|)}-\color{red}{\frac{1}{2}(\text{x}-\mu_m)^t\Sigma_m^{-1}(\text{x}-\mu_m)}\]</span> with <span class="math inline">\(\pi_m=\mathbb{P}(Y=m), \mu_m\in\mathbb{R}^d\)</span> and matrix <span class="math inline">\(\Sigma_m\)</span> to be estimated <span class="math inline">\(\forall m=1,\dots,M\)</span>.</p>
 </div>
 </div>
