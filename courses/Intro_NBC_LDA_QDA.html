@@ -2396,7 +2396,7 @@ if (outputEl) {{
 </div>
 <div class="callout-content">
 <ul>
-<li>LDA &amp; QDA can be combined, for example, <a href="http://www.leg.ufpr.br/~eferreira/CE064/Regularized%20Discriminant%20Analysis.pdf">Friedman (1989)</a> proposed: <span class="math display">\[\hat{\Sigma}_k(\alpha)=\alpha\hat{\Sigma}_k+(1-\alpha)\hat{\Sigma},\]</span> for some <span class="math inline">\(\alpha\in[0,1]\)</span>.</li>
+<li>LDA &amp; QDA can be combined, for example, <a href="http://www.leg.ufpr.br/~eferreira/CE064/Regularized%20Discriminant%20Analysis.pdf">Friedman (1989)</a> proposed: <span class="math display">\[\hat{\Sigma}_k(\alpha)=\alpha\hat{\Sigma}+(1-\alpha)\hat{\Sigma}_k,\]</span> for some <span class="math inline">\(\alpha\in[0,1]\)</span>.</li>
 <li>The common covariance <span class="math inline">\(\hat{\Sigma}\)</span> can also be shrunk toward the scalar covariance: <span class="math display">\[\hat{\Sigma}(\lambda)=\lambda\hat{\Sigma}+(1-\lambda)\hat{\sigma}^2I_d,\]</span> for some <span class="math inline">\(\lambda\in[0,1]\)</span>.</li>
 <li>Define a family of covariance matrices <span class="math inline">\(\hat{\Sigma}_k(\alpha,\lambda)\)</span> for <span class="math inline">\((\alpha,\lambda)\in[0,1]^2\)</span> to be tuned.</li>
 </ul>
@@ -2522,7 +2522,7 @@ if (outputEl) {{
 </div><div class="column" style="width:50%;">
 <ul>
 <li><p>Right covariances <span class="math inline">\(\approx\)</span> right shapes!</p></li>
-<li><p><span class="math inline">\(\alpha\in[0,1]\)</span> balances the trade-off between the covariance <span class="math inline">\(\Sigma_k\)</span> (QDA) and the common variance <span class="math inline">\(\Sigma\)</span> (LDA): <span class="math display">\[\Sigma_k(\alpha)=\alpha\Sigma_k+(1-\alpha)\Sigma.\]</span></p></li>
+<li><p><span class="math inline">\(\alpha\in[0,1]\)</span> balances the trade-off between the covariance <span class="math inline">\(\Sigma_k\)</span> (QDA) and the common variance <span class="math inline">\(\Sigma\)</span> (LDA): <span class="math display">\[\Sigma_k(\alpha)=\alpha\Sigma+(1-\alpha)\Sigma_k.\]</span></p></li>
 <li><p>In practice, <span class="math inline">\(\alpha\)</span> is tuned using <code>cross-validation</code> technique (later).</p></li>
 </ul>
 </div></div>
@@ -2535,7 +2535,7 @@ if (outputEl) {{
 <ul>
 <li>QDA: <span class="math inline">\(\hat{\Sigma}_k\)</span> are computed differently.</li>
 <li>LDA: <span class="math inline">\(\hat{\Sigma}_k=\hat{\Sigma}\)</span> are all the same.</li>
-<li>RDA: <span class="math inline">\(\hat{\Sigma}_k(\alpha,\lambda)=\alpha\hat{\Sigma}_k+(1-\alpha)[\lambda\hat{\Sigma}+(1-\lambda)\hat{\sigma}^2I_d]\)</span>.</li>
+<li>RDA: <span class="math inline">\(\hat{\Sigma}_k(\alpha,\lambda)=(1-\alpha)\hat{\Sigma}_k+\alpha[\lambda\hat{\Sigma}+(1-\lambda)\hat{\sigma}^2I_d]\)</span>.</li>
 </ul></li>
 <li>No method is always the best, it depends on the data.</li>
 </ul>
