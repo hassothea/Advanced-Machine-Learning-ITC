@@ -1,0 +1,154 @@
+---
+title: "TP2 - Logistic Regression"
+subtitle: "Advanced Machine Learning"
+title-block-banner: true
+title-block-style: manuscript
+title-block-banner-color: "#adf0ff"
+author: "HAS Sothea, PhD"
+format: html
+---
+
+# **Objective**
+
+> This practical session (TP) is designed to help you apply the concepts and techniques you have learned about Logistic Regression.
+
+> The `notebook` of this `TP` can be downloaded here: [TP2_Logistic_Regression](https://hassothea.github.io/Advanced-Machine-Learning-ITC/TPs/TP2_LogisticReg.html){target="_blank"}.
+
+----------
+
+## **1. Binary Logistic Regression**
+
+<!-- We will begin with [Email Spam Dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset). -->
+
+Let's us begin by exploring the [Heart Disease Dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset){target="_blank"}.
+
+```{python}
+#| echo: true
+#| eval: false
+import numpy as np
+import pandas as pd
+import kagglehub
+# Download latest version
+path = kagglehub.dataset_download("johnsmith88/heart-disease-dataset")
+data = pd.read_csv(path + "/heart.csv")
+data.head(5)
+```
+```{python}
+#| echo: false
+#| eval: true
+import numpy as np
+import pandas as pd
+import kagglehub
+# Download latest version
+# path = kagglehub.dataset_download("johnsmith88/heart-disease-dataset")
+path = "C:/Users/hasso/.cache/kagglehub/datasets/johnsmith88/heart-disease-dataset/versions/2"
+data = pd.read_csv(path + "/heart.csv")
+data.head(5)
+```
+
+**A. General view of the dataset.**
+
+- Load the dataset into **jupyter notebook**.
+- What's the dimension of the dataset? 
+- How many qualitative and quantitative variables are there in this dataset (answer this question carefully! Some qualitative variables may be encoded using numerical values)?
+- Convert variables into their suitable data type if there are any inconsistent variable types.
+
+```{python}
+#| echo: true
+import numpy as np
+import pandas as pd
+import kagglehub
+# To do
+```
+
+**B. Univariate Analysis.**
+
+- Compute summary statistics and visualize the distribution of the **target** and the **inputs** according to their types.
+- Are there any missing values? Duplicate data? Outliers? 
+- Address or handle the above problems.
+
+```{python}
+#| echo: true
+# To do
+```
+
+**C. Bivariate Analysis.**
+
+- Compute [Pearson's correlation matrix](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient){target="_blank"} of quantitative variables. Make some remarks on the correlation matrix.
+- Compute [Spearman's correlation matrix](https://www.statstutor.ac.uk/resources/uploaded/spearmans.pdf){target="_blank"} of quantitative variables. Make some remarks on this correlation matrix.
+- Visualize the relationship between each input to the target. 
+
+```{python}
+#| echo: true
+# To do
+```
+
+> **Remark:** You should try to understand the differences between these two types of correlation as they are helpful in guiding you to the correct transformation of inputs for model development. At the end of this step, you should have strong intuition on the most impactful inputs for building the model and how can to handle the inputs before building models.
+
+**D. Building Logistic Regression Models**
+
+- Split the data into $80\%-20\%$ training and testing data.
+
+```{python}
+#| echo: true
+#| eval: false
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(data, target, test_size=0.2, stratify=target, random_state=42)
+```
+
+- Build a logistic regression model on the training data then compute its performance on the test data using suitable metrics.
+- Comment your finding.
+- Try to study logistic regression using polynomial features. Compute its formance on the test data and compare to the previous result.
+- Apply regularization methods and evaluate their performances on the test data.
+
+**E. Try what you have done on `Spam` dataset.**
+
+```{python}
+#| echo: true
+#| eval: true
+path = "https://raw.githubusercontent.com/hassothea/MLcourses/main/data/spam.txt"
+data = pd.read_csv(path, sep=" ")
+data.head(5)
+```
+
+## **2. Multiple Logistic Regression**
+
+In this section, you will work with `Mnist` dataset. It can be imported using the following codes.
+
+```{python}
+#| echo: true
+#| eval: true
+from keras.datasets import mnist
+
+(train_images, train_labels), (test_images, test_labels) = mnist.load_data()
+
+import matplotlib.pyplot as plt
+import numpy as np
+digit = np.random.choice(train_images.shape[0], size=10)
+_ , axs = plt.subplots(2,5, figsize=(9, 3))
+for i in range(10):
+  axs[i//5, i%5].imshow(train_images[digit[i]])
+  axs[i//5, i%5].axis("off")
+  axs[i//5, i%5].set_title(f"True label: {train_labels[digit[i]]}")
+plt.tight_layout()
+plt.show()
+```
+
+- Build Multinomial Logistic Regressoin to recognize images of testing digits of this dataset.
+- Evaluate its performance using suitable matrix and conclude.
+
+```{python}
+#| eval: false
+#| echo: true
+# To do
+```
+
+# References
+
+$^{\text{📚}}$ [Chapter 4, *Introduction to Statistical Learning with R*, James et al. (2021).](https://www.sas.upenn.edu/~fdiebold/NoHesitations/BookAdvanced.pdf){target="_blank"}. <br>
+$^{\text{📚}}$ [Chapter 2, *The Elements of Statistical Learning*, Hastie et al. (2008).](https://www.sas.upenn.edu/~fdiebold/NoHesitations/BookAdvanced.pdf){target="_blank"}. <br>
+$^{\text{📚}}$ [Friedman (1989)](http://www.leg.ufpr.br/~eferreira/CE064/Regularized%20Discriminant%20Analysis.pdf){target="_blank"}. <br>
+$^{\text{📚}}$ [Heart Disease Dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset){target="_blank"}. <br>
+$^{\text{📚}}$ [Different Type of Correlation Metrics Used by Data Scientists, Ashray](https://www.analyticsvidhya.com/blog/2021/09/different-type-of-correlation-metrics-used-by-data-scientist/){target="_blank"}. 
+
+-------------
