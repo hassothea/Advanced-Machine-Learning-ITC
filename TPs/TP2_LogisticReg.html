@@ -70,18 +70,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="TP2_LogisticReg_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <style>
 
-      .quarto-title-block .quarto-title-banner h1,
-      .quarto-title-block .quarto-title-banner h2,
-      .quarto-title-block .quarto-title-banner h3,
-      .quarto-title-block .quarto-title-banner h4,
-      .quarto-title-block .quarto-title-banner h5,
-      .quarto-title-block .quarto-title-banner h6
-      {
-        color: #adf0ff;
-      }
-
       .quarto-title-block .quarto-title-banner {
-        color: #adf0ff;
+        background: #15797A;
       }
 </style>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
@@ -118,6 +108,7 @@ window.Quarto = {
 };
 </script>
 
+<link rel="stylesheet" href="styles.css">
 </head>
 
 <body class="fullcontent">
@@ -169,14 +160,14 @@ window.Quarto = {
 <p>This practical session (TP) is designed to help you apply the concepts and techniques you have learned about Logistic Regression.</p>
 </blockquote>
 <blockquote class="blockquote">
-<p>The <code>notebook</code> of this <code>TP</code> can be downloaded here: <a href="https://hassothea.github.io/Advanced-Machine-Learning-ITC/TPs/TP2_LogisticReg.ipynb" target="_blank">TP2_Logistic_Regression</a>.</p>
+<p>The <code>notebook</code> of this <code>TP</code> can be downloaded here: <a href="https://hassothea.github.io/Advanced-Machine-Learning-ITC/TPs/TP2_LogisticReg.html" target="_blank">TP2_Logistic_Regression</a>.</p>
 </blockquote>
 <hr>
 <section id="binary-logistic-regression" class="level2">
 <h2 class="anchored" data-anchor-id="binary-logistic-regression"><strong>1. Binary Logistic Regression</strong></h2>
 <!-- We will begin with [Email Spam Dataset](https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset). -->
-<p>Let’s begin by exploring the <a href="https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset" target="_blank">Heart Disease Dataset</a>.</p>
-<div id="1664addd" class="cell" data-execution_count="1">
+<p>Let’s us begin by exploring the <a href="https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset" target="_blank">Heart Disease Dataset</a>.</p>
+<div id="de6b2012" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> kagglehub</span>
@@ -185,8 +176,8 @@ window.Quarto = {
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(path <span class="op">+</span> <span class="st">"/heart.csv"</span>)</span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>data.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="70113bb0" class="cell" data-execution_count="2">
-<div class="cell-output cell-output-display" data-execution_count="6">
+<div id="ecad9b67" class="cell" data-execution_count="2">
+<div class="cell-output cell-output-display" data-execution_count="49">
 <div>
 
 
@@ -309,7 +300,7 @@ window.Quarto = {
 <li>How many qualitative and quantitative variables are there in this dataset (answer this question carefully! Some qualitative variables may be encoded using numerical values)?</li>
 <li>Convert variables into their suitable data type if there are any inconsistent variable types.</li>
 </ul>
-<div id="a4aefac2" class="cell" data-execution_count="3">
+<div id="9e9d27d1" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> kagglehub</span>
@@ -321,7 +312,7 @@ window.Quarto = {
 <li>Are there any missing values? Duplicate data? Outliers?</li>
 <li>Address or handle the above problems.</li>
 </ul>
-<div id="9b6f9208" class="cell" data-execution_count="4">
+<div id="e926d956" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p><strong>C. Bivariate Analysis.</strong></p>
@@ -330,17 +321,17 @@ window.Quarto = {
 <li>Compute <a href="https://www.statstutor.ac.uk/resources/uploaded/spearmans.pdf" target="_blank">Spearman’s correlation matrix</a> of quantitative variables. Make some remarks on this correlation matrix.</li>
 <li>Visualize the relationship between each input to the target.</li>
 </ul>
-<div id="8fccbd1f" class="cell" data-execution_count="5">
+<div id="c82b65f2" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <blockquote class="blockquote">
-<p><strong>Remark:</strong> You should try to understand the differences between these two types of correlation coefficients as they are helpful in guiding you to the correct input transformation for model development. At the end of this step, you should have strong intuition on the most impactful inputs for building the model, and how should you handle the inputs before building models.</p>
+<p><strong>Remark:</strong> You should try to understand the differences between these two types of correlation as they are helpful in guiding you to the correct transformation of inputs for model development. At the end of this step, you should have strong intuition on the most impactful inputs for building the model and how can to handle the inputs before building models.</p>
 </blockquote>
 <p><strong>D. Building Logistic Regression Models</strong></p>
 <ul>
 <li>Split the data into <span class="math inline">\(80\%-20\%\)</span> training and testing data.</li>
 </ul>
-<div id="6133c54e" class="cell" data-execution_count="6">
+<div id="41f272f4" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.model_selection <span class="im">import</span> train_test_split</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>X_train, X_test, y_train, y_test <span class="op">=</span> train_test_split(data, target, test_size<span class="op">=</span><span class="fl">0.2</span>, stratify<span class="op">=</span>target, random_state<span class="op">=</span><span class="dv">42</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -351,11 +342,11 @@ window.Quarto = {
 <li>Apply regularization methods and evaluate their performances on the test data.</li>
 </ul>
 <p><strong>E. Try what you have done on <code>Spam</code> dataset.</strong></p>
-<div id="db34b140" class="cell" data-execution_count="7">
+<div id="5aae3b04" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>path <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/hassothea/MLcourses/main/data/spam.txt"</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>data <span class="op">=</span> pd.read_csv(path, sep<span class="op">=</span><span class="st">" "</span>)</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>data.head(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="10">
+<div class="cell-output cell-output-display" data-execution_count="53">
 <div>
 
 
@@ -518,7 +509,7 @@ window.Quarto = {
 <section id="multiple-logistic-regression" class="level2">
 <h2 class="anchored" data-anchor-id="multiple-logistic-regression"><strong>2. Multiple Logistic Regression</strong></h2>
 <p>In this section, you will work with <code>Mnist</code> dataset. It can be imported using the following codes.</p>
-<div id="eda71558" class="cell" data-execution_count="8">
+<div id="f499591b" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> keras.datasets <span class="im">import</span> mnist</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>(train_images, train_labels), (test_images, test_labels) <span class="op">=</span> mnist.load_data()</span>
@@ -545,7 +536,7 @@ window.Quarto = {
 <li>Build Multinomial Logistic Regressoin to recognize images of testing digits of this dataset.</li>
 <li>Evaluate its performance using suitable matrix and conclude.</li>
 </ul>
-<div id="5e9ad01a" class="cell" data-execution_count="9">
+<div id="611ca1b3" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
