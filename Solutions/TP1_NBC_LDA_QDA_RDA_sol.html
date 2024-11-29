@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.56">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="HAS Sothea, PhD">
+
+<title>Solution: TP1 - NBC, LDA, QDA &amp; RDA</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="TP1_NBC_LDA_QDA_RDA_sol_files/libs/clipboard/clipboard.min.js"></script>
+<script src="TP1_NBC_LDA_QDA_RDA_sol_files/libs/quarto-html/quarto.js"></script>
+<script src="TP1_NBC_LDA_QDA_RDA_sol_files/libs/quarto-html/popper.min.js"></script>
+<script src="TP1_NBC_LDA_QDA_RDA_sol_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="TP1_NBC_LDA_QDA_RDA_sol_files/libs/quarto-html/anchor.min.js"></script>
+<link href="TP1_NBC_LDA_QDA_RDA_sol_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="TP1_NBC_LDA_QDA_RDA_sol_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="TP1_NBC_LDA_QDA_RDA_sol_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="TP1_NBC_LDA_QDA_RDA_sol_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="TP1_NBC_LDA_QDA_RDA_sol_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<style>
+
+      .quarto-title-block .quarto-title-banner {
+        background: #15797A;
+      }
+</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="fullcontent">
+
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Solution: TP1 - NBC, LDA, QDA &amp; RDA</h1>
+            <p class="subtitle lead">Advanced Machine Learning</p>
+          </div>
+
+    
+    <div class="quarto-title-meta-container">
+      <div class="quarto-title-meta-column-start">
+        
+        <div class="quarto-title-meta">
+
+                <div>
+            <div class="quarto-title-meta-heading">Author</div>
+            <div class="quarto-title-meta-contents">
+                        <p>HAS Sothea, PhD </p>
+                      </div>
+          </div>
+                
+          
+                
+              </div>
+      </div>
+      <div class="quarto-title-meta-column-end quarto-other-formats-target">
+      </div>
+    </div>
+
+
+
+    <div class="quarto-other-links-text-target">
+    </div>  </div>
+</header><div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+  
+
+
+<section id="objective" class="level1">
+<h1><strong>Objective</strong></h1>
+<blockquote class="blockquote">
+<p>This practical session (TP) aims to familiarize you with the key assumptions of each introduced model. The first section is designed to test your understanding of the data and models, while the second section focuses on applying your knowledge to real-world datasets. Please read the instructions carefully and try to complete the tasks independently. If you get stuck, don’t hesitate to ask for help. Good luck!</p>
+</blockquote>
+<blockquote class="blockquote">
+<p>Please download the <code>Jupyter Notebook</code> by clicking <a href="https://hassothea.github.io/Advanced-Machine-Learning-ITC/TPs/TP1_NBC_LDA_QDA_RDA.ipynb" target="_blank">here</a>. The session will cover the following sections:</p>
+</blockquote>
+<blockquote class="blockquote">
+<ol type="1">
+<li>Model Assumptions and Data Simulation: It’s important to verify that any models should work well on the data that respect their assumptions.</li>
+</ol>
+<ul>
+<li><em>Data Simulation</em>: Create datasets that either respect or violate the assumptions of each model, including addressing imbalance problems.</li>
+<li><em>Model Implementation</em>: Put the models into action.</li>
+<li><em>Model Evaluation</em>: Report the performance of the models using appropriate metrics.</li>
+</ul>
+</blockquote>
+<blockquote class="blockquote">
+<ol start="2" type="1">
+<li>Real Data Implementation: In real-world problems, things are more complicated because very often the assumptions of the model are often violated. We shall see this by exploring the following real datasets.</li>
+</ol>
+<ul>
+<li><em>Real Datasets</em>: you may start with <code>Spam</code> dataset to reproduce the experimental results shown in the course, or explore <a href="https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset" target="_blank">Heart Disease Dataset</a>.</li>
+<li><em>Preprocessing/Descriptive Analysis</em>: Understand the features and verify the assumptions (use correlation metrics, for example).</li>
+<li><em>Implementation</em>: Apply the models to the datasets.</li>
+<li><em>Evaluation</em>: Assess the performance of the models.</li>
+</ul>
+</blockquote>
+<hr>
+<section id="simulation" class="level2">
+<h2 class="anchored" data-anchor-id="simulation"><strong>1. Simulation</strong></h2>
+<ul>
+<li>Write a function <code>simulateClassificationData(n=200, d=2, M = 2, method = "nbc")</code> that returns input-output observations with
+<ul>
+<li>observation size <code>n</code> (<span class="math inline">\(200\)</span> by default)</li>
+<li>input <span class="math inline">\(x_i\)</span> are of dimension <code>d</code> (<span class="math inline">\(2\)</span> by default)</li>
+<li>the target <span class="math inline">\(y\)</span> contains <code>M</code> classes taking values in <span class="math inline">\(\{1,2,\dots,M\}\)</span></li>
+<li>and lastly, <code>method</code> defines the prefered method that is supposed to work well on this dataset. It should be an element of [<code>nbc</code>, <code>LDA</code>, <code>QDA</code>, <code>RDA</code>] (<code>nbc</code> by default).</li>
+</ul></li>
+</ul>
+<p><em>I set an example below, you can do it differently.</em></p>
+<div id="2c26071b" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_classification</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.datasets <span class="im">import</span> make_spd_matrix</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> simulateClassificationData(n<span class="op">=</span><span class="dv">200</span>, d<span class="op">=</span><span class="dv">2</span>, M<span class="op">=</span><span class="dv">2</span>, method<span class="op">=</span><span class="st">"nbc"</span>, class_weights <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co">    Generates a design matrix for classification that works well with Naive Bayes.</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters:</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    n (int): Number of samples.</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="co">    d (int): Number of features.</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="co">    M (int): Number of classes.</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co">    method (str): Method name, default is "nbc" (Naive Bayes Classification).</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="co">    class_weights (arr): The proportion of each class. If `None`, the data is balanced.</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">    random_state (int): Random seed for repreoducing the result in random simulation.</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">    </span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns:</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="co">    X (numpy.ndarray): Feature matrix.</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="co">    y (numpy.ndarray): Labels.</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Check if the class weight is given. If it's None, it's a balanced case.</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> class_weights <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        class_weights <span class="op">=</span> np.ones(M)<span class="op">/</span>M</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    idx <span class="op">=</span> np.random.multinomial(<span class="dv">1</span>, class_weights, size<span class="op">=</span>n)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    n_class <span class="op">=</span> [np.<span class="bu">sum</span>(idx[:,i]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M)]</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Generate data that prefers NBC model.</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> method <span class="op">==</span> <span class="st">"nbc"</span>:</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> np.random.randint(<span class="dv">1</span>,<span class="dv">10</span>, <span class="dv">1</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        x1 <span class="op">=</span> np.random.poisson(b, size<span class="op">=</span>(n_class[<span class="dv">0</span>], d<span class="op">//</span><span class="dv">2</span>))</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>        b <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">2</span>, <span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        x2 <span class="op">=</span> np.random.normal(np.<span class="bu">min</span>(b), np.<span class="bu">abs</span>(np.<span class="bu">max</span>(b)), size<span class="op">=</span>(n_class[<span class="dv">0</span>], d<span class="op">//</span><span class="dv">2</span>))</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        X <span class="op">=</span> np.column_stack([x1,x2])</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,M):</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>            b <span class="op">=</span> np.random.randint(<span class="dv">1</span>,<span class="dv">10</span>, <span class="dv">1</span>)</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>            x1 <span class="op">=</span> np.random.poisson(b, size<span class="op">=</span>(n_class[i], d<span class="op">//</span><span class="dv">2</span>))</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>            b <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">2</span>,<span class="dv">2</span>, <span class="dv">2</span>)</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>            x2 <span class="op">=</span> np.random.normal(np.<span class="bu">min</span>(b), np.<span class="bu">abs</span>(np.<span class="bu">max</span>(b)), size<span class="op">=</span>(n_class[i], d<span class="op">//</span><span class="dv">2</span>))</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>            X <span class="op">=</span> np.row_stack([X, np.column_stack([x1, x2])])</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> np.repeat([<span class="bu">str</span>(i) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,M<span class="op">+</span><span class="dv">1</span>)], n_class)</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Data that prefers LDA</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> method <span class="op">==</span> <span class="st">"lda"</span>:</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>        <span class="co"># generate parameters (means &amp; covariances)</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        mu <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, size<span class="op">=</span>d)</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>        sigma0 <span class="op">=</span> make_spd_matrix(n_dim<span class="op">=</span>d)</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>            mu <span class="op">=</span> np.row_stack([mu, np.random.uniform(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, size<span class="op">=</span>d)])</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>            </span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>        <span class="co"># generate observations</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>        X <span class="op">=</span> np.row_stack([np.random.multivariate_normal(mean<span class="op">=</span>mu[i,:], cov<span class="op">=</span>sigma0, size<span class="op">=</span><span class="bu">int</span>(n<span class="op">*</span>class_weights[i])) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M)])</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> np.concatenate([np.repeat(<span class="bu">str</span>(i), <span class="bu">int</span>(n<span class="op">*</span>class_weights[i<span class="op">-</span><span class="dv">1</span>])) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,M<span class="op">+</span><span class="dv">1</span>)])</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Data that prefers QDA or RDA</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">elif</span> method <span class="kw">in</span> [<span class="st">"qda"</span>, <span class="st">"rda"</span>]:</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>        <span class="co"># generate parameters (means &amp; covariances)</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>        mu <span class="op">=</span> np.random.uniform(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, size<span class="op">=</span>d)</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>        sigma <span class="op">=</span> [make_spd_matrix(n_dim<span class="op">=</span>d)]</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M<span class="op">-</span><span class="dv">1</span>):</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>            mu <span class="op">=</span> np.row_stack([mu, np.random.uniform(<span class="op">-</span><span class="dv">5</span>, <span class="dv">5</span>, size<span class="op">=</span>d)])</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>            sigma.append(make_spd_matrix(n_dim<span class="op">=</span>d))</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>        <span class="co"># generate observations</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>        X <span class="op">=</span> np.row_stack([np.random.multivariate_normal(mean<span class="op">=</span>mu[i,:], cov<span class="op">=</span>sigma[i], size<span class="op">=</span><span class="bu">int</span>(n<span class="op">*</span>class_weights[i])) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(M)])</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>        y <span class="op">=</span> np.concatenate([np.repeat(<span class="bu">str</span>(i), <span class="bu">int</span>(n<span class="op">*</span>class_weights[i<span class="op">-</span><span class="dv">1</span>])) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,M<span class="op">+</span><span class="dv">1</span>)])</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>    <span class="co"># If method is other than above, return value error.</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>        <span class="pp">ValueError</span>(<span class="st">"method is either 'nbc', 'lda', 'qda' or 'rda'!"</span>)</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Randomly shuffle the data</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>    id_shuffle <span class="op">=</span> np.random.permutation(<span class="bu">range</span>(<span class="bu">len</span>(y)))</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> X[id_shuffle,:], y[id_shuffle].astype(<span class="bu">object</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+<section id="balanced-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="balanced-datasets">1.1. Balanced datasets</h3>
+<p><strong>A.</strong> With <span class="math inline">\((n,d,M)=(700,2,3)\)</span> fixed and three different options for method in the list <code>['nbc', 'lda', 'qda']</code>, use the function above to generate three different datasets: <code>(X_nbc, y_nbc)</code>, <code>(X_lda, y_lda)</code>, and <code>(X_qda, y_qda)</code>, where <code>X</code> and <code>y</code> are different input-output pairs. An example is given below.</p>
+<div id="42f6f6e4" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Set parameters</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>n, d, M <span class="op">=</span> <span class="dv">700</span>, <span class="dv">2</span>, <span class="dv">3</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Set random seed for our data generation</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>X_nbc, y_nbc <span class="op">=</span> simulateClassificationData(n, d, M, method<span class="op">=</span><span class="st">"nbc"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>X_lda, y_lda <span class="op">=</span> simulateClassificationData(n, d, M, method<span class="op">=</span><span class="st">"lda"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>X_qda, y_qda <span class="op">=</span> simulateClassificationData(n, d, M, method<span class="op">=</span><span class="st">"qda"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<p><br></p>
+<p><strong>B.</strong> Write the code to visualize the first <span class="math inline">\(500\)</span> observations from each dataset using scatterplots colored according to the classes of the target <code>y</code>. The remaining <span class="math inline">\(200\)</span> observations are treated as the testing data. Your result should look similar to the figures below.</p>
+<div id="de37cc61" class="cell" data-message="false" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> seaborn <span class="im">as</span> sns</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Color </span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>color_tab <span class="op">=</span> sns.color_palette(<span class="st">"Set2"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>palette <span class="op">=</span> {<span class="bu">str</span>(i): color_tab[i<span class="op">-</span><span class="dv">1</span>] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">1</span>,M<span class="op">+</span><span class="dv">1</span>)}</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize <span class="op">=</span> (<span class="dv">9</span>, <span class="dv">3</span>))</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>X_nbc[:<span class="dv">500</span>,<span class="dv">0</span>], y<span class="op">=</span>X_nbc[:<span class="dv">500</span>,<span class="dv">1</span>], hue<span class="op">=</span>y_nbc[:<span class="dv">500</span>], ax<span class="op">=</span>ax[<span class="dv">0</span>], palette<span class="op">=</span>palette)</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">'Naive Bayes'</span>)</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_xlabel(<span class="st">'x1'</span>)</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_ylabel(<span class="st">'x2'</span>)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>X_lda[:<span class="dv">500</span>,<span class="dv">0</span>], y<span class="op">=</span>X_lda[:<span class="dv">500</span>,<span class="dv">1</span>], hue<span class="op">=</span>y_lda[:<span class="dv">500</span>], ax<span class="op">=</span>ax[<span class="dv">1</span>], palette<span class="op">=</span>palette)</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">'LDA'</span>)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_xlabel(<span class="st">'x1'</span>)</span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="co"># ax[1].set_ylabel('x2')</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>X_qda[:<span class="dv">500</span>,<span class="dv">0</span>], y<span class="op">=</span>X_qda[:<span class="dv">500</span>,<span class="dv">1</span>], hue<span class="op">=</span>y_qda[:<span class="dv">500</span>], ax<span class="op">=</span>ax[<span class="dv">2</span>], palette<span class="op">=</span>palette)</span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_title(<span class="st">'QDA'</span>)</span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_xlabel(<span class="st">'x1'</span>)</span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="co"># ax[2].set_ylabel('x2')</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP1_NBC_LDA_QDA_RDA_sol_files/figure-html/cell-5-output-1.png" width="738" height="307" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<p><strong>C.</strong> For now, work with <code>(X_nbc, y_nbc)</code> dataset.</p>
+<p><strong>a.</strong> Train <code>NBC</code>, <code>LDA</code> and <code>QDA</code> on the first <span class="math inline">\(500\)</span> observations. Report the <em>accuracies</em>, <em>precision</em>, <em>recall</em> and <em>f1-scaore</em> of the three models on the remaining <span class="math inline">\(200\)</span> testing points. You should obtain the results as illustrated below.</p>
+<div id="35d1c55c" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"white"</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.naive_bayes <span class="im">import</span> GaussianNB</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.discriminant_analysis <span class="im">import</span> LinearDiscriminantAnalysis <span class="im">as</span> LDA</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.discriminant_analysis <span class="im">import</span> QuadraticDiscriminantAnalysis <span class="im">as</span> QDA</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.metrics <span class="im">import</span> confusion_matrix, ConfusionMatrixDisplay, precision_score, recall_score, f1_score, accuracy_score</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize <span class="op">=</span> (<span class="fl">9.5</span>, <span class="dv">3</span>))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {<span class="st">"nbc"</span>: GaussianNB(), <span class="st">"lda"</span>: LDA(), <span class="st">"qda"</span>: QDA()}</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>fit <span class="op">=</span> {x: m.fit(X_nbc[:<span class="dv">500</span>,:], y_nbc[:<span class="dv">500</span>]) <span class="cf">for</span> x,m <span class="kw">in</span> models.items()}</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> {x: m.predict(X_nbc[<span class="dv">500</span>:,:]) <span class="cf">for</span> x,m <span class="kw">in</span> fit.items()}</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>conf_mat <span class="op">=</span> {x: confusion_matrix(y_nbc[<span class="dv">500</span>:], y) <span class="cf">for</span> x,y <span class="kw">in</span> preds.items()}</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(conf_mat[<span class="st">'nbc'</span>]).plot(ax<span class="op">=</span>ax[<span class="dv">0</span>], colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="ss">f"NBC with acc = </span><span class="sc">{</span>(conf_mat[<span class="st">'nbc'</span>].diagonal().<span class="bu">sum</span>() <span class="op">/</span> conf_mat[<span class="st">'nbc'</span>].<span class="bu">sum</span>())<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(conf_mat[<span class="st">'lda'</span>]).plot(ax<span class="op">=</span>ax[<span class="dv">1</span>],colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="ss">f"LDA with acc = </span><span class="sc">{</span>(conf_mat[<span class="st">'lda'</span>].diagonal().<span class="bu">sum</span>() <span class="op">/</span> conf_mat[<span class="st">'lda'</span>].<span class="bu">sum</span>())<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(conf_mat[<span class="st">'qda'</span>]).plot(ax<span class="op">=</span>ax[<span class="dv">2</span>], colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_title(<span class="ss">f"QDA with acc = </span><span class="sc">{</span>(conf_mat[<span class="st">'qda'</span>].diagonal().<span class="bu">sum</span>() <span class="op">/</span> conf_mat[<span class="st">'qda'</span>].<span class="bu">sum</span>())<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>prec <span class="op">=</span> [precision_score(y_nbc[<span class="dv">500</span>:], y, average<span class="op">=</span><span class="st">"macro"</span>) <span class="cf">for</span> y <span class="kw">in</span> preds.values()]</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>rec <span class="op">=</span> [recall_score(y_nbc[<span class="dv">500</span>:], y, average<span class="op">=</span><span class="st">"macro"</span>) <span class="cf">for</span> y <span class="kw">in</span> preds.values()]</span>
+<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> [f1_score(y_nbc[<span class="dv">500</span>:], y, average<span class="op">=</span><span class="st">"macro"</span>) <span class="cf">for</span> y <span class="kw">in</span> preds.values()]</span>
+<span id="cb4-24"><a href="#cb4-24" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a>res_nbc <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Recall'</span>: rec,</span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Precision'</span>: prec,</span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a>        <span class="st">'F1-score'</span>: f1</span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"NBC"</span>, <span class="st">"LDA"</span>, <span class="st">"QDA"</span>]</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(res_nbc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP1_NBC_LDA_QDA_RDA_sol_files/figure-html/cell-7-output-1.png" data-fig-pos="center" width="767" height="293" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Recall  Precision  F1-score
+NBC  0.831125   0.831003  0.824050
+LDA  0.639893   0.634448  0.636846
+QDA  0.820832   0.818865  0.814520</code></pre>
+</div>
+</div>
+<p><br></p>
+<p><strong>b.</strong> Draw the decision boundary with the testing data of the three models on the <code>(X_nbc, y_nbc)</code> dataset. An example of a function for drawing such a boundary is given below.</p>
+<div id="a078611c" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.inspection <span class="im">import</span> DecisionBoundaryDisplay</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> matplotlib.colors <span class="im">import</span> ListedColormap</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_decision_boundary(X, y,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                           models <span class="op">=</span> <span class="bu">list</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                           n_x <span class="op">=</span> <span class="dv">30</span>, </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>                           n_y <span class="op">=</span> <span class="dv">30</span>,</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>                           model_names <span class="op">=</span> [<span class="st">'NBC'</span>, <span class="st">'LDA'</span>, <span class="st">'QDA'</span>]):</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>    x_min, x_max <span class="op">=</span> X[:, <span class="dv">0</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="dv">1</span>, X[:, <span class="dv">0</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>    y_min, y_max <span class="op">=</span> X[:, <span class="dv">1</span>].<span class="bu">min</span>() <span class="op">-</span> <span class="dv">1</span>, X[:, <span class="dv">1</span>].<span class="bu">max</span>() <span class="op">+</span> <span class="dv">1</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>    xx, yy <span class="op">=</span> np.meshgrid(np.linspace(x_min, x_max, n_x),</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>                         np.arange(y_min, y_max, n_y))</span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">3</span>))</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>    keys <span class="op">=</span> <span class="bu">list</span>(conf_mat.keys())</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> idx, model <span class="kw">in</span> <span class="bu">enumerate</span>(models):</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>        ax <span class="op">=</span> axes[idx]</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>        disp <span class="op">=</span> DecisionBoundaryDisplay.from_estimator(</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>            model, X, response_method<span class="op">=</span><span class="st">'predict'</span>, ax<span class="op">=</span>ax, cmap<span class="op">=</span>ListedColormap(palette.values()), alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>        sns.scatterplot(x<span class="op">=</span>X[:,<span class="dv">0</span>], y<span class="op">=</span>X[:,<span class="dv">1</span>], hue<span class="op">=</span>y, palette<span class="op">=</span>palette, ax<span class="op">=</span>ax)</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>        ax.set_title(model_names[idx])</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>        ax.set_xlabel(<span class="st">"x1"</span>)</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> idx <span class="op">==</span> <span class="dv">0</span>:</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>            ax.set_ylabel(<span class="st">"x2"</span>)</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>        ax.set_title(<span class="ss">f"</span><span class="sc">{</span>model_names[idx]<span class="sc">}</span><span class="ss"> with acc = </span><span class="sc">{</span>(conf_mat[keys[idx]].diagonal().<span class="bu">sum</span>() <span class="op">/</span> conf_mat[keys[idx]].<span class="bu">sum</span>())<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<div id="be762430" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>plot_decision_boundary(X_nbc[<span class="dv">500</span>:,:], y_nbc[<span class="dv">500</span>:], </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>                       models<span class="op">=</span>models.values())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP1_NBC_LDA_QDA_RDA_sol_files/figure-html/cell-10-output-1.png" width="760" height="272" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<p><strong>D.</strong> Do the same with the other two datasets. Make some comments on the results: Are the results reasonable? Explain.</p>
+<p><br></p>
+<ul>
+<li>For <code>(X_lda, y_lda)</code>, you should produce the following result.</li>
+</ul>
+<div id="d1268949" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize <span class="op">=</span> (<span class="fl">9.5</span>, <span class="dv">3</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {<span class="st">"nbc"</span>: GaussianNB(), <span class="st">"lda"</span>: LDA(), <span class="st">"qda"</span>: QDA()}</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>fit <span class="op">=</span> {x: m.fit(X_lda[:<span class="dv">500</span>,:], y_lda[:<span class="dv">500</span>]) <span class="cf">for</span> x,m <span class="kw">in</span> models.items()}</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> {x: m.predict(X_lda[<span class="dv">500</span>:,:]) <span class="cf">for</span> x,m <span class="kw">in</span> fit.items()}</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>conf_mat <span class="op">=</span> {x: confusion_matrix(y_lda[<span class="dv">500</span>:], y) <span class="cf">for</span> x,y <span class="kw">in</span> preds.items()}</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(conf_mat[<span class="st">'nbc'</span>]).plot(ax<span class="op">=</span>ax[<span class="dv">0</span>], colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="ss">f"NBC with acc = </span><span class="sc">{</span>(conf_mat[<span class="st">'nbc'</span>].diagonal().<span class="bu">sum</span>() <span class="op">/</span> conf_mat[<span class="st">'nbc'</span>].<span class="bu">sum</span>())<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(conf_mat[<span class="st">'lda'</span>]).plot(ax<span class="op">=</span>ax[<span class="dv">1</span>], colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="ss">f"LDA with acc = </span><span class="sc">{</span>(conf_mat[<span class="st">'lda'</span>].diagonal().<span class="bu">sum</span>() <span class="op">/</span> conf_mat[<span class="st">'lda'</span>].<span class="bu">sum</span>())<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(conf_mat[<span class="st">'qda'</span>]).plot(ax<span class="op">=</span>ax[<span class="dv">2</span>], colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_title(<span class="ss">f"QDA with acc = </span><span class="sc">{</span>(conf_mat[<span class="st">'qda'</span>].diagonal().<span class="bu">sum</span>() <span class="op">/</span> conf_mat[<span class="st">'qda'</span>].<span class="bu">sum</span>())<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>plot_decision_boundary(X_lda[<span class="dv">500</span>:,:], y_lda[<span class="dv">500</span>:], </span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>                       models<span class="op">=</span>models.values())</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>prec <span class="op">=</span> [precision_score(y_lda[<span class="dv">500</span>:], y, average<span class="op">=</span><span class="st">"macro"</span>) <span class="cf">for</span> y <span class="kw">in</span> preds.values()]</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>rec <span class="op">=</span> [recall_score(y_lda[<span class="dv">500</span>:], y, average<span class="op">=</span><span class="st">"macro"</span>) <span class="cf">for</span> y <span class="kw">in</span> preds.values()]</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> [f1_score(y_lda[<span class="dv">500</span>:], y, average<span class="op">=</span><span class="st">"macro"</span>) <span class="cf">for</span> y <span class="kw">in</span> preds.values()]</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>res_lda <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Recall'</span>: rec,</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Precision'</span>: prec,</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">'F1-score'</span>: f1</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"NBC"</span>, <span class="st">"LDA"</span>, <span class="st">"QDA"</span>]</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(res_lda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP1_NBC_LDA_QDA_RDA_sol_files/figure-html/cell-12-output-1.png" data-fig-pos="center" width="767" height="293" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP1_NBC_LDA_QDA_RDA_sol_files/figure-html/cell-12-output-2.png" data-fig-pos="center" width="752" height="272" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Recall  Precision  F1-score
+NBC  0.975737   0.973918  0.974699
+LDA  0.980639   0.978421  0.979373
+QDA  0.980639   0.978421  0.979373</code></pre>
+</div>
+</div>
+<p><br></p>
+<ul>
+<li>For <code>(X_qda, y_qda)</code>, your result should be similar to the result below.</li>
+</ul>
+<div id="333eb43f" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize <span class="op">=</span> (<span class="fl">9.5</span>, <span class="dv">3</span>))</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {<span class="st">"nbc"</span>: GaussianNB(), <span class="st">"lda"</span>: LDA(), <span class="st">"qda"</span>: QDA()}</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>fit <span class="op">=</span> {x: m.fit(X_qda[:<span class="dv">500</span>,:], y_qda[:<span class="dv">500</span>]) <span class="cf">for</span> x,m <span class="kw">in</span> models.items()}</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> {x: m.predict(X_qda[<span class="dv">500</span>:,:]) <span class="cf">for</span> x,m <span class="kw">in</span> fit.items()}</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>conf_mat <span class="op">=</span> {x: confusion_matrix(y_qda[<span class="dv">500</span>:], y) <span class="cf">for</span> x,y <span class="kw">in</span> preds.items()}</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(conf_mat[<span class="st">'nbc'</span>]).plot(ax<span class="op">=</span>ax[<span class="dv">0</span>], colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="ss">f"NBC with acc = </span><span class="sc">{</span>(conf_mat[<span class="st">'nbc'</span>].diagonal().<span class="bu">sum</span>() <span class="op">/</span> conf_mat[<span class="st">'nbc'</span>].<span class="bu">sum</span>())<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(conf_mat[<span class="st">'lda'</span>]).plot(ax<span class="op">=</span>ax[<span class="dv">1</span>], colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="ss">f"LDA with acc = </span><span class="sc">{</span>(conf_mat[<span class="st">'lda'</span>].diagonal().<span class="bu">sum</span>() <span class="op">/</span> conf_mat[<span class="st">'lda'</span>].<span class="bu">sum</span>())<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(conf_mat[<span class="st">'qda'</span>]).plot(ax<span class="op">=</span>ax[<span class="dv">2</span>], colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_title(<span class="ss">f"QDA with acc = </span><span class="sc">{</span>(conf_mat[<span class="st">'qda'</span>].diagonal().<span class="bu">sum</span>() <span class="op">/</span> conf_mat[<span class="st">'qda'</span>].<span class="bu">sum</span>())<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>plot_decision_boundary(X_qda[<span class="dv">500</span>:,:], y_qda[<span class="dv">500</span>:], </span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>                       models<span class="op">=</span>models.values())</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>prec <span class="op">=</span> [precision_score(y_lda[<span class="dv">500</span>:], y, average<span class="op">=</span><span class="st">"macro"</span>) <span class="cf">for</span> y <span class="kw">in</span> preds.values()]</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>rec <span class="op">=</span> [recall_score(y_qda[<span class="dv">500</span>:], y, average<span class="op">=</span><span class="st">"macro"</span>) <span class="cf">for</span> y <span class="kw">in</span> preds.values()]</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> [f1_score(y_qda[<span class="dv">500</span>:], y, average<span class="op">=</span><span class="st">"macro"</span>) <span class="cf">for</span> y <span class="kw">in</span> preds.values()]</span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>res_qda <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Recall'</span>: rec,</span>
+<span id="cb10-26"><a href="#cb10-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Precision'</span>: prec,</span>
+<span id="cb10-27"><a href="#cb10-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">'F1-score'</span>: f1</span>
+<span id="cb10-28"><a href="#cb10-28" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb10-29"><a href="#cb10-29" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"NBC"</span>, <span class="st">"LDA"</span>, <span class="st">"QDA"</span>]</span>
+<span id="cb10-30"><a href="#cb10-30" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb10-31"><a href="#cb10-31" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(res_qda)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP1_NBC_LDA_QDA_RDA_sol_files/figure-html/cell-14-output-1.png" data-fig-pos="center" width="767" height="293" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP1_NBC_LDA_QDA_RDA_sol_files/figure-html/cell-14-output-2.png" data-fig-pos="center" width="752" height="272" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Recall  Precision  F1-score
+NBC  0.928110   0.334877  0.929750
+LDA  0.932805   0.339067  0.934641
+QDA  0.948944   0.338166  0.950155</code></pre>
+</div>
+</div>
+<p><br></p>
+<blockquote class="blockquote">
+<ul>
+<li>Your comments:</li>
+</ul>
+</blockquote>
+<hr>
+</section>
+<section id="imbalanced-datasets" class="level3">
+<h3 class="anchored" data-anchor-id="imbalanced-datasets">1.2. Imbalanced datasets</h3>
+<p>Now, we will work with imbalanced simulated datasets. The goal is to identify problems associated with imbalanced datasets and to propose possible solutions we have studied so far.</p>
+<p><br></p>
+<p><strong>A.</strong> With the same options as in the balanced case, but adding an additional option of <code>class_weights = [0.2, 0.15, 0.65]</code>, generate other three imbalanced datasets. An example is provided below.</p>
+<div id="bda0f817" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>weights <span class="op">=</span> [<span class="fl">0.2</span>, <span class="fl">0.15</span>, <span class="fl">0.65</span>] <span class="co">#[0.2, 0.15, 0.65]</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>) </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>X_nbc, y_nbc <span class="op">=</span> simulateClassificationData(n, d, M, method<span class="op">=</span><span class="st">"nbc"</span>, class_weights<span class="op">=</span>weights)</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>X_lda, y_lda <span class="op">=</span> simulateClassificationData(n, d, M, method<span class="op">=</span><span class="st">"lda"</span>, class_weights<span class="op">=</span>weights)</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>X_qda, y_qda <span class="op">=</span> simulateClassificationData(n, d, M, method<span class="op">=</span><span class="st">"qda"</span>, class_weights<span class="op">=</span>weights)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p><br></p>
+<p><strong>a.</strong> Recreate the countplots and scatterplots for the three simulated datasets as ilustrated below.</p>
+<div id="0df28795" class="cell" data-message="false" data-execution_count="16">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"whitegrid"</span>)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize <span class="op">=</span> (<span class="dv">9</span>, <span class="dv">3</span>))</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span>y_nbc[:<span class="dv">500</span>], hue<span class="op">=</span>y_nbc[:<span class="dv">500</span>], ax<span class="op">=</span>ax[<span class="dv">0</span>], order<span class="op">=</span>[<span class="st">'1'</span>, <span class="st">'2'</span>, <span class="st">'3'</span>], palette<span class="op">=</span>palette)</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">'Naive Bayes'</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span>y_lda[:<span class="dv">500</span>], hue<span class="op">=</span>y_lda[:<span class="dv">500</span>], ax<span class="op">=</span>ax[<span class="dv">1</span>], order<span class="op">=</span>[<span class="st">'1'</span>, <span class="st">'2'</span>, <span class="st">'3'</span>], palette<span class="op">=</span>palette)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">'LDA'</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_ylabel(<span class="st">""</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>sns.countplot(x<span class="op">=</span>y_qda[:<span class="dv">500</span>], hue<span class="op">=</span>y_qda[:<span class="dv">500</span>], ax<span class="op">=</span>ax[<span class="dv">2</span>], order<span class="op">=</span>[<span class="st">'1'</span>, <span class="st">'2'</span>, <span class="st">'3'</span>], palette<span class="op">=</span>palette)</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_title(<span class="st">'QDA'</span>)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_ylabel(<span class="st">""</span>)</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>fig.show()</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize <span class="op">=</span> (<span class="dv">9</span>, <span class="dv">3</span>))</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>X_nbc[:<span class="dv">500</span>,<span class="dv">0</span>], y<span class="op">=</span>X_nbc[:<span class="dv">500</span>,<span class="dv">1</span>], hue<span class="op">=</span>y_nbc[:<span class="dv">500</span>], ax<span class="op">=</span>ax[<span class="dv">0</span>], palette<span class="op">=</span>palette)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="st">'Naive Bayes'</span>)</span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>X_lda[:<span class="dv">500</span>,<span class="dv">0</span>], y<span class="op">=</span>X_lda[:<span class="dv">500</span>,<span class="dv">1</span>], hue<span class="op">=</span>y_lda[:<span class="dv">500</span>], ax<span class="op">=</span>ax[<span class="dv">1</span>], palette<span class="op">=</span>palette)</span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="st">'LDA'</span>)</span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span>X_qda[:<span class="dv">500</span>,<span class="dv">0</span>], y<span class="op">=</span>X_qda[:<span class="dv">500</span>,<span class="dv">1</span>], hue<span class="op">=</span>y_qda[:<span class="dv">500</span>], ax<span class="op">=</span>ax[<span class="dv">2</span>], palette<span class="op">=</span>palette)</span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_title(<span class="st">'QDA'</span>)</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true" tabindex="-1"></a>fig.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP1_NBC_LDA_QDA_RDA_sol_files/figure-html/cell-17-output-1.png" width="746" height="287" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP1_NBC_LDA_QDA_RDA_sol_files/figure-html/cell-17-output-2.png" width="718" height="287" class="figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<hr>
+<p><strong>b.</strong> Recreate the following performance metrics on imbalanced <code>nbc</code> dataset.</p>
+<div id="29805cb5" class="cell" data-execution_count="18">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"white"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize <span class="op">=</span> (<span class="fl">9.5</span>, <span class="dv">3</span>))</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>models <span class="op">=</span> {<span class="st">"nbc"</span>: GaussianNB(), <span class="st">"lda"</span>: LDA(store_covariance<span class="op">=</span><span class="va">True</span>), <span class="st">"qda"</span>: QDA(store_covariance<span class="op">=</span><span class="va">True</span>)}</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>fit <span class="op">=</span> {x: m.fit(X_nbc[:<span class="dv">500</span>,:], y_nbc[:<span class="dv">500</span>]) <span class="cf">for</span> x,m <span class="kw">in</span> models.items()}</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> {x: m.predict(X_nbc[<span class="dv">500</span>:,:]) <span class="cf">for</span> x,m <span class="kw">in</span> fit.items()}</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>conf_mat <span class="op">=</span> {x: confusion_matrix(y_nbc[<span class="dv">500</span>:],y) <span class="cf">for</span> x,y <span class="kw">in</span> preds.items()}</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(conf_mat[<span class="st">'nbc'</span>]).plot(ax<span class="op">=</span>ax[<span class="dv">0</span>], colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">0</span>].set_title(<span class="ss">f"NBC with acc = </span><span class="sc">{</span>(conf_mat[<span class="st">'nbc'</span>].diagonal().<span class="bu">sum</span>() <span class="op">/</span> conf_mat[<span class="st">'nbc'</span>].<span class="bu">sum</span>())<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(conf_mat[<span class="st">'lda'</span>]).plot(ax<span class="op">=</span>ax[<span class="dv">1</span>], colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">1</span>].set_title(<span class="ss">f"LDA with acc = </span><span class="sc">{</span>(conf_mat[<span class="st">'lda'</span>].diagonal().<span class="bu">sum</span>() <span class="op">/</span> conf_mat[<span class="st">'lda'</span>].<span class="bu">sum</span>())<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(conf_mat[<span class="st">'qda'</span>]).plot(ax<span class="op">=</span>ax[<span class="dv">2</span>], colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>ax[<span class="dv">2</span>].set_title(<span class="ss">f"QDA with acc = </span><span class="sc">{</span>(conf_mat[<span class="st">'qda'</span>].diagonal().<span class="bu">sum</span>() <span class="op">/</span> conf_mat[<span class="st">'qda'</span>].<span class="bu">sum</span>())<span class="sc">.</span><span class="bu">round</span>(<span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>prec <span class="op">=</span> [precision_score(y_nbc[<span class="dv">500</span>:], y, average<span class="op">=</span><span class="st">"macro"</span>) <span class="cf">for</span> y <span class="kw">in</span> preds.values()]</span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>rec <span class="op">=</span> [recall_score(y_nbc[<span class="dv">500</span>:], y, average<span class="op">=</span><span class="st">"macro"</span>) <span class="cf">for</span> y <span class="kw">in</span> preds.values()]</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> [f1_score(y_nbc[<span class="dv">500</span>:], y, average<span class="op">=</span><span class="st">"macro"</span>) <span class="cf">for</span> y <span class="kw">in</span> preds.values()]</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>res_nbc <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Recall'</span>: rec,</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Precision'</span>: prec,</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">'F1-score'</span>: f1</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"NBC"</span>, <span class="st">"LDA"</span>, <span class="st">"QDA"</span>]</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(res_nbc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP1_NBC_LDA_QDA_RDA_sol_files/figure-html/cell-19-output-1.png" data-fig-pos="center" width="767" height="293" class="figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Recall  Precision  F1-score
+NBC  0.671337   0.695662  0.682120
+LDA  0.545978   0.467226  0.501748
+QDA  0.663761   0.689268  0.674789</code></pre>
+</div>
+</div>
+<p><br></p>
+<p><strong>c.</strong> How does this result compare to the balanced case? Does this surprise you?</p>
+<blockquote class="blockquote">
+<p>Your opinion…</p>
+</blockquote>
+<hr>
+<p><strong>B.</strong> Do the same (compute these matrices) for the other two imbalanced datasets.</p>
+<hr>
+<p><strong>C.</strong> In <code>NBC</code>, <code>LDA</code>, and <code>QDA</code>, all parameters (such as means and variances) are directly estimated using data. However, in <code>RDA</code>, we can tune the trade-off parameter <span class="math inline">\(\alpha\)</span> that combines the <code>QDA</code> covariance matrices with the <code>LDA</code> covariance matrix. This allows for a balance between the flexibility of <code>QDA</code> and the simplicity of <code>LDA</code>:</p>
+<p><span class="math display">\[\hat{\Sigma}_k(\alpha)=\alpha\hat{\Sigma}_k+(1-\alpha)\hat{\Sigma}.\]</span></p>
+<p>We are now searching for an optimal <span class="math inline">\(\alpha^*\)</span> that yields better or even the best scores (recall, precision and F<span class="math inline">\(_1\)</span>-score). This can be achieved using <a href="https://en.wikipedia.org/wiki/Cross-validation_(statistics)#:~:text=Cross%2Dvalidation%20includes%20resampling%20and,model%20will%20perform%20in%20practice." target="_blank">Cross-Validation</a> technique. The steps we follow are:</p>
+<p><strong>a.</strong> First, let’s fix <span class="math inline">\(\alpha_0=0.5\)</span>, write a <code>python</code> function called <code>deltaRDA(X, y, X_test, alpha = 0.5, lda_cov = None, qda_cov = None, means = None)</code> where</p>
+<ul>
+<li><code>X,y</code>: input-output training data</li>
+<li><code>X_test</code>: an array containing testing inputs <span class="math inline">\(x_i\)</span> for computing <span class="math inline">\(\delta(x)\)</span>.</li>
+<li><code>alpha</code>: regularized strength (be default is <span class="math inline">\(0.5\)</span>).</li>
+<li><code>lda_cov</code>: common covariance in <code>LDA</code> (<span class="math inline">\(\hat{\Sigma}\)</span>). It should be estimated using data <code>(X,y)</code> if it’s <code>None</code>.</li>
+<li><code>qda_cov</code>: list of per-class covariances in <code>QDA</code> (<span class="math inline">\(\hat{\Sigma}_k\)</span>). It should be estimated using data.<br>
+</li>
+<li><code>means</code>: list of per-class means. It should also be estimated if it’s <code>None</code>. <br></li>
+</ul>
+<p><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>This function computes the prediction of <code>X_test</code> using <code>RDA</code> at regularized value <span class="math inline">\(\alpha_0\)</span>. Hint: using the implementation on <a href="https://hassothea.github.io/Advanced-Machine-Learning-ITC/courses/Intro_NBC_LDA_QDA.html#/implementation-of-qda" target="_blank">slide 37</a>.</p>
+<div id="1ba7830e" class="cell" data-execution_count="21">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> deltaRDA(X, y, X_test, alpha <span class="op">=</span> <span class="fl">0.5</span>, lda_cov <span class="op">=</span> <span class="va">None</span>, qda_cov <span class="op">=</span> <span class="va">None</span>, means <span class="op">=</span> <span class="va">None</span>):</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>    classes <span class="op">=</span> np.unique(y)</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    decoder <span class="op">=</span> {i:classes[i] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(classes))}</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> means <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>        means <span class="op">=</span> [np.mean(X[y <span class="op">==</span> x,:], axis<span class="op">=</span><span class="dv">0</span>) <span class="cf">for</span> x <span class="kw">in</span> classes]</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> qda_cov <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>        qda_cov <span class="op">=</span> [np.cov(X[y <span class="op">==</span> x,:].transpose()) <span class="cf">for</span> x <span class="kw">in</span> classes]</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> lda_cov <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>        lda_cov <span class="op">=</span> np.<span class="bu">sum</span>(qda_cov, axis <span class="op">=</span> <span class="dv">0</span>)<span class="op">/</span>(<span class="bu">len</span>(y)<span class="op">-</span><span class="bu">len</span>(classes))</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    cov <span class="op">=</span> [qda_cov[i]<span class="op">*</span>alpha <span class="op">+</span> (<span class="dv">1</span><span class="op">-</span>alpha)<span class="op">*</span>lda_cov <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(classes))]</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="kw">def</span> delta(x, pi, mu, sigma):</span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>        inv_sigma <span class="op">=</span> np.linalg.inv(sigma)</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>        res <span class="op">=</span> np.row_stack([np.log(pi) <span class="op">-</span> np.log(np.linalg.det(sigma))<span class="op">-</span>np.dot(np.matmul((v <span class="op">-</span> mu), inv_sigma), (v <span class="op">-</span> mu))<span class="op">/</span><span class="dv">2</span> <span class="cf">for</span> v <span class="kw">in</span> x])</span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> res</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>    prop <span class="op">=</span> np.array([np.<span class="bu">sum</span>(y <span class="op">==</span> v) <span class="cf">for</span> v <span class="kw">in</span> classes])</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>    prop <span class="op">=</span> prop <span class="op">/</span> np.<span class="bu">sum</span>(prop)</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>    temp <span class="op">=</span> np.column_stack([delta(X_test, prop[i], means[i], cov[i]) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(classes))])</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>    loc <span class="op">=</span> np.argmax(temp, axis<span class="op">=</span><span class="dv">1</span>)</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.array([decoder[loc[i]] <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(X_test.shape[<span class="dv">0</span>])])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<hr>
+<p><br></p>
+<p><strong>b.</strong> Compute the confusion matrix and all the performance matrices on the test data using <code>deltaRDA</code> at <span class="math inline">\(\alpha=0.5\)</span> as defined above.</p>
+<div id="3a66e056" class="cell" data-layout-align="center" data-execution_count="22">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># making prediction using delta(x)</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>y_hat <span class="op">=</span> deltaRDA(X_nbc[:<span class="dv">500</span>,:], y_nbc[:<span class="dv">500</span>], X_nbc[<span class="dv">500</span>:,:])</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="co"># confusion matrix</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>conf_mat <span class="op">=</span> confusion_matrix(y_nbc[<span class="dv">500</span>:], y_hat)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># metrics</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>prec <span class="op">=</span> precision_score(y_nbc[<span class="dv">500</span>:], y_hat, average<span class="op">=</span><span class="st">"macro"</span>)</span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>rec <span class="op">=</span> recall_score(y_nbc[<span class="dv">500</span>:], y_hat, average<span class="op">=</span><span class="st">"macro"</span>)</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> f1_score(y_nbc[<span class="dv">500</span>:], y_hat, average<span class="op">=</span><span class="st">"macro"</span>)</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>_, ax <span class="op">=</span> plt.subplots(figsize <span class="op">=</span> (<span class="dv">5</span>,<span class="dv">4</span>))</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>ConfusionMatrixDisplay(conf_mat).plot(ax<span class="op">=</span>ax, colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>ax.set_title(<span class="vs">r"$\text{RDA at }\alpha=0.5\text{ on 'nbc' dataset}$"</span>)</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>res_nbc <span class="op">=</span> pd.DataFrame(</span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Recall'</span>: rec,</span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Precision'</span>: prec,</span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">'F1-score'</span>: f1,</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">'Accuracy'</span>:  (conf_mat.diagonal().<span class="bu">sum</span>() <span class="op">/</span> conf_mat.<span class="bu">sum</span>()).<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>    index<span class="op">=</span>[<span class="st">"RDA"</span>]</span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(res_nbc)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TP1_NBC_LDA_QDA_RDA_sol_files/figure-html/cell-23-output-1.png" class="quarto-figure quarto-figure-center figure-img" width="356" height="381"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>       Recall  Precision  F1-score  Accuracy
+RDA  0.726954   0.667442  0.686269      0.69</code></pre>
+</div>
+</div>
+<p><br></p>
+<blockquote class="blockquote">
+<p><strong>Remark question:</strong> What do you think about the results of <code>RDA</code> compared to the previous results from <code>NBC</code>, <code>LDA</code>, and <code>QDA</code>? Remember, we initially chose <span class="math inline">\(\alpha_0=0.5\)</span>. Now, let’s find the optimal value of <span class="math inline">\(\alpha\)</span>.</p>
+</blockquote>
+<hr>
+<p><strong>c.</strong> Split your training data into <span class="math inline">\(K\)</span> folds namely: <span class="math inline">\(F_1,F_2,\dots,F_K\)</span>. Let <span class="math inline">\(F_{-k}\)</span> represent all the training data except for the <span class="math inline">\(k\)</span>th fold. For any fixed <span class="math inline">\(\alpha\)</span>, write a function <code>cvRDA(alpha)</code> that returns the average F<span class="math inline">\(_1\)</span>-score over each fold <span class="math inline">\(F_k\)</span> using model built on <span class="math inline">\(F_{-k}\)</span>. One way to do this is shown below.</p>
+<div id="91185329" class="cell" data-execution_count="23">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>K <span class="op">=</span> <span class="dv">5</span>          <span class="co"># choose K = 5</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>np.random.seed(<span class="dv">42</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>rand_id <span class="op">=</span> np.random.choice(<span class="bu">range</span>(K), replace<span class="op">=</span><span class="va">True</span>, size<span class="op">=</span><span class="dv">500</span>) <span class="co"># Shuffle index</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>X_train <span class="op">=</span> X_nbc[:<span class="dv">500</span>,:]</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>y_train <span class="op">=</span> y_nbc[:<span class="dv">500</span>]</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>X_test <span class="op">=</span> X_nbc[<span class="dv">500</span>:,:]</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>y_test <span class="op">=</span> y_nbc[<span class="dv">500</span>:]</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cvRDA(alpha):</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    res <span class="op">=</span> []</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> k <span class="kw">in</span> <span class="bu">range</span>(K):</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>        y_hat <span class="op">=</span> deltaRDA(X<span class="op">=</span>X_train[rand_id <span class="op">!=</span> k,:],</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>                         y<span class="op">=</span>y_train[rand_id <span class="op">!=</span> k],</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>                         X_test<span class="op">=</span>X_train[rand_id <span class="op">==</span> k,:],</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>                         alpha<span class="op">=</span>alpha)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>        res.append(f1_score(y_train[rand_id <span class="op">==</span> k], y_hat, average<span class="op">=</span><span class="st">"macro"</span>))</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> np.mean(res).<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"* Cross-validation F1-score for alpha = 0.5: </span><span class="sc">{</span>cvRDA(<span class="fl">0.5</span>)<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>* Cross-validation F1-score for alpha = 0.5: 0.76</code></pre>
+</div>
+</div>
+<p><br></p>
+<p><strong>d.</strong> Choose a grid for <span class="math inline">\(\alpha\)</span>, for example, <code>G=np.linspace(0,1,100)</code> which generates uniform grid of <span class="math inline">\(100\)</span> values on interval <span class="math inline">\([0,1]\)</span>. Now, write <code>Python</code> code that searches for <span class="math inline">\(\alpha^*\)</span> on the grid <span class="math inline">\(G\)</span> with largest cross-validation F<span class="math inline">\(_1\)</span>-score. Plot the the following graph of <span class="math inline">\((x,y)=(\alpha, \text{CVError}(\alpha))\)</span>.</p>
+<div id="61eaf1be" class="cell" data-layout-align="center" data-execution_count="24">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>G <span class="op">=</span> np.linspace(<span class="dv">0</span>,<span class="dv">1</span>,<span class="dv">100</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>cvError <span class="op">=</span> [cvRDA(alpha) <span class="cf">for</span> alpha <span class="kw">in</span> G]</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>plt.plot(G, cvError, label<span class="op">=</span><span class="st">"CV error"</span>)</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="vs">r"$\alpha\text{ vs cross-validation score}$"</span>)</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r"$\alpha$"</span>)</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">"Cross-validation score"</span>)</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>alpha_opt <span class="op">=</span> G[cvError<span class="op">==</span>np.<span class="bu">max</span>(cvError)].<span class="bu">round</span>(<span class="dv">3</span>)</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>plt.vlines(alpha_opt, ymin<span class="op">=</span>np.<span class="bu">min</span>(cvError), ymax<span class="op">=</span>np.<span class="bu">max</span>(cvError), colors<span class="op">=</span><span class="st">'r'</span>, linestyles<span class="op">=</span><span class="st">"dashed"</span>, label<span class="op">=</span><span class="vs">r"$\text{Optimal }\alpha^*$"</span>)</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>plt.scatter(x<span class="op">=</span>alpha_opt, y<span class="op">=</span>[np.<span class="bu">min</span>(cvError) <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(alpha_opt))], c<span class="op">=</span><span class="st">'r'</span>)</span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"* Optimal alpha: </span><span class="sc">{</span>alpha_opt<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>* Optimal alpha: [0.263 0.293 0.303]</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TP1_NBC_LDA_QDA_RDA_sol_files/figure-html/cell-25-output-2.png" class="quarto-figure quarto-figure-center figure-img" width="601" height="455"></p>
+</figure>
+</div>
+</div>
+</div>
+<p><strong>e.</strong> Build the <code>RDA</code> model with the observed optimal <span class="math inline">\(\alpha^*\)</span> using all <span class="math inline">\(500\)</span> training data points. Report the performance metrics on the testing data. Conclude your findings.</p>
+<div id="67fd7d48" class="cell" data-layout-align="center" data-execution_count="25">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>preds <span class="op">=</span> {alpha: deltaRDA(X<span class="op">=</span>X_train,</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>                         y<span class="op">=</span>y_train,</span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>                         X_test<span class="op">=</span>X_test,</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>                         alpha<span class="op">=</span>alpha) <span class="cf">for</span> alpha <span class="kw">in</span> alpha_opt}</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>recall <span class="op">=</span> {alpha: np.<span class="bu">round</span>(recall_score(y_test, y, average<span class="op">=</span><span class="st">"macro"</span>), <span class="dv">3</span>) <span class="cf">for</span> alpha, y <span class="kw">in</span> preds.items()}</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>precision <span class="op">=</span> {alpha: np.<span class="bu">round</span>(precision_score(y_test, y, average<span class="op">=</span><span class="st">"macro"</span>), <span class="dv">3</span>) <span class="cf">for</span> alpha, y <span class="kw">in</span> preds.items()}</span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>f1 <span class="op">=</span> {alpha: np.<span class="bu">round</span>(f1_score(y_test, y, average<span class="op">=</span><span class="st">"macro"</span>), <span class="dv">3</span>) <span class="cf">for</span> alpha, y <span class="kw">in</span> preds.items()}</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>acc <span class="op">=</span> {alpha: np.<span class="bu">round</span>(np.mean(y_test <span class="op">==</span> y), <span class="dv">3</span>) <span class="cf">for</span> alpha, y <span class="kw">in</span> preds.items()}</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>df_acc <span class="op">=</span> pd.DataFrame({</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">"alpha"</span> : <span class="bu">list</span>(acc.keys()),</span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"accucary"</span> : <span class="bu">list</span>(acc.values())</span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"* Accuracy:"</span>)</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_acc)</span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>sns.<span class="bu">set</span>(style<span class="op">=</span><span class="st">"white"</span>)</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize <span class="op">=</span> (<span class="fl">9.75</span>, <span class="dv">3</span>))</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>i <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> alpha <span class="kw">in</span> alpha_opt:</span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    mat <span class="op">=</span> confusion_matrix(y_test, preds[alpha])</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    ConfusionMatrixDisplay(mat).plot(ax<span class="op">=</span>ax[i], colorbar<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    ax[i].set_title(<span class="ss">f"RDA at alpha=</span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">round</span>(alpha,<span class="dv">3</span>)<span class="sc">}</span><span class="ss">; score=</span><span class="sc">{</span>np<span class="sc">.</span><span class="bu">round</span>(f1[alpha], <span class="dv">3</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    i <span class="op">+=</span> <span class="dv">1</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>* Accuracy:
+   alpha  accucary
+0  0.263     0.715
+1  0.293     0.720
+2  0.303     0.720</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="TP1_NBC_LDA_QDA_RDA_sol_files/figure-html/cell-26-output-2.png" class="quarto-figure quarto-figure-center figure-img" width="790" height="299"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="dd770bfa" class="cell" data-execution_count="26">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"* Other metrics:"</span>)</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(pd.DataFrame({</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">"recall"</span>: recall.values(),</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">"precision"</span> : precision.values(),</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">"f1-score"</span> : f1.values() </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>    },index<span class="op">=</span><span class="bu">list</span>(recall.keys())))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>* Other metrics:
+       recall  precision  f1-score
+0.263   0.704      0.679      0.69
+0.293   0.717      0.687      0.70
+0.303   0.717      0.687      0.70</code></pre>
+</div>
+</div>
+<p><br></p>
+<blockquote class="blockquote">
+<p>You conclusion:</p>
+</blockquote>
+<hr>
+</section>
+</section>
+<section id="real-datasets" class="level2">
+<h2 class="anchored" data-anchor-id="real-datasets"><strong>2. Real datasets</strong></h2>
+<blockquote class="blockquote">
+<p>In this section, you will reproduce the results shown in the course with <code>Spam</code> dataset and explore the <a href="https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset" target="_blank">Heart Disease Dataset</a>. We can download <code>Spam</code> data using the code below:</p>
+</blockquote>
+<div id="b758f48a" class="cell" data-execution_count="27">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>path_spam <span class="op">=</span> <span class="st">"https://raw.githubusercontent.com/hassothea/MLcourses/refs/heads/main/data/spam.txt"</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>spam <span class="op">=</span> pd.read_csv(path_spam, index_col<span class="op">=</span><span class="dv">0</span>, sep<span class="op">=</span><span class="st">" "</span>)</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>spam.sample(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="36">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">make</th>
+<th data-quarto-table-cell-role="th">address</th>
+<th data-quarto-table-cell-role="th">all</th>
+<th data-quarto-table-cell-role="th">num3d</th>
+<th data-quarto-table-cell-role="th">our</th>
+<th data-quarto-table-cell-role="th">over</th>
+<th data-quarto-table-cell-role="th">remove</th>
+<th data-quarto-table-cell-role="th">internet</th>
+<th data-quarto-table-cell-role="th">order</th>
+<th data-quarto-table-cell-role="th">mail</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">charSemicolon</th>
+<th data-quarto-table-cell-role="th">charRoundbracket</th>
+<th data-quarto-table-cell-role="th">charSquarebracket</th>
+<th data-quarto-table-cell-role="th">charExclamation</th>
+<th data-quarto-table-cell-role="th">charDollar</th>
+<th data-quarto-table-cell-role="th">charHash</th>
+<th data-quarto-table-cell-role="th">capitalAve</th>
+<th data-quarto-table-cell-role="th">capitalLong</th>
+<th data-quarto-table-cell-role="th">capitalTotal</th>
+<th data-quarto-table-cell-role="th">type</th>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">Id</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">3924</td>
+<td>0.08</td>
+<td>0.0</td>
+<td>0.16</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.08</td>
+<td>0.0</td>
+<td>0.08</td>
+<td>0.73</td>
+<td>0.00</td>
+<td>...</td>
+<td>0.126</td>
+<td>0.172</td>
+<td>0.057</td>
+<td>0.000</td>
+<td>0.022</td>
+<td>0.0</td>
+<td>3.212</td>
+<td>44</td>
+<td>665</td>
+<td>nonspam</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3631</td>
+<td>0.00</td>
+<td>0.0</td>
+<td>0.00</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.00</td>
+<td>0.0</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>...</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.0</td>
+<td>1.000</td>
+<td>1</td>
+<td>5</td>
+<td>nonspam</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4081</td>
+<td>0.00</td>
+<td>0.0</td>
+<td>0.00</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.00</td>
+<td>0.0</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>...</td>
+<td>0.000</td>
+<td>0.344</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.0</td>
+<td>1.400</td>
+<td>5</td>
+<td>14</td>
+<td>nonspam</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">180</td>
+<td>0.00</td>
+<td>0.0</td>
+<td>0.00</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.00</td>
+<td>0.0</td>
+<td>2.04</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>...</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.969</td>
+<td>0.000</td>
+<td>0.0</td>
+<td>2.179</td>
+<td>18</td>
+<td>85</td>
+<td>spam</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">590</td>
+<td>0.00</td>
+<td>0.0</td>
+<td>0.00</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.00</td>
+<td>0.0</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>1.51</td>
+<td>...</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.000</td>
+<td>0.0</td>
+<td>2.769</td>
+<td>15</td>
+<td>36</td>
+<td>spam</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 58 columns</p>
+</div>
+</div>
+</div>
+<p><br></p>
+<p><strong>A.</strong> Perform descriptive analysis on the datasets: aim for connection between inputs and the target.</p>
+<p><strong>B.</strong> Split and built model based on your analysis in the previous step.</p>
+<p><strong>C.</strong> Report the results on the testing data.</p>
+<hr>
+<blockquote class="blockquote">
+<p>The solution to this section had already been shown in the course. It will be left for students to explore by reading the slide of the course <a href="https://hassothea.github.io/Advanced-Machine-Learning-ITC/courses/Intro_NBC_LDA_QDA.html" target="_blank">here</a>.</p>
+</blockquote>
+<hr>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>References</h1>
+<p><span class="math inline">\(^{\text{📚}}\)</span> <a href="https://www.sas.upenn.edu/~fdiebold/NoHesitations/BookAdvanced.pdf" target="_blank">Chapter 4, <em>Introduction to Statistical Learning with R</em>, James et al.&nbsp;(2021).</a>. <br> <span class="math inline">\(^{\text{📚}}\)</span> <a href="https://www.sas.upenn.edu/~fdiebold/NoHesitations/BookAdvanced.pdf" target="_blank">Chapter 2, <em>The Elements of Statistical Learning</em>, Hastie et al.&nbsp;(2008).</a>. <br> <span class="math inline">\(^{\text{📚}}\)</span> <a href="http://www.leg.ufpr.br/~eferreira/CE064/Regularized%20Discriminant%20Analysis.pdf" target="_blank">Friedman (1989)</a>. <br> <span class="math inline">\(^{\text{📚}}\)</span> <a href="https://en.wikipedia.org/wiki/Cross-validation_(statistics)#:~:text=Cross%2Dvalidation%20includes%20resampling%20and,model%20will%20perform%20in%20practice." target="_blank">Cross-Validation technique</a>{target=“_blank”}. <br> <span class="math inline">\(^{\text{📚}}\)</span> <a href="https://www.kaggle.com/datasets/johnsmith88/heart-disease-dataset" target="_blank">Heart Disease Dataset</a>.</p>
+<hr>
+</section>
+
+
+<div id="quarto-appendix" class="default"><section id="footnotes" class="footnotes footnotes-end-of-document" role="doc-endnotes"><h2 class="anchored quarto-appendix-heading">Footnotes</h2>
+
+<ol>
+<li id="fn1"><p>This may be the most difficult question.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
