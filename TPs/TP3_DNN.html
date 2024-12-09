@@ -165,7 +165,7 @@ window.Quarto = {
 <li>Define python function to evaluate your function <span class="math inline">\(f\)</span>.</li>
 <li>Plot the graph of this function at <span class="math inline">\(n=1000\)</span> values some domain <span class="math inline">\(D\)</span>, for example <span class="math inline">\(D=[-5,5]\)</span>.</li>
 </ul>
-<div id="cell-5" class="cell" data-execution_count="1">
+<div id="cell-5" class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> plotly.io <span class="im">as</span> pio</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>pio.renderers.default <span class="op">=</span> <span class="st">'notebook'</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="co"># For example</span></span>
@@ -215,10 +215,12 @@ if (outputEl) {{
                         })                };                });            </script>        </div>
 </div>
 </div>
-<p><strong>B.</strong> Build <span class="math inline">\(2\)</span>-layer DNN with your favorite hyperparameters to estimate this function on the domain <span class="math inline">\(D\)</span> (You can use your favorite <code>Python</code> modules such as <strong>Keras</strong> or <code>Pytorch</code> to build the model).</p>
+<p><strong>B.</strong> Build a <span class="math inline">\(2\)</span>-layer DNN with your favorite hyperparameters to estimate this function on the domain <span class="math inline">\(D\)</span> (You can use your favorite <code>Python</code> modules such as <strong>Keras</strong> or <code>Pytorch</code> to build the model).</p>
 <ul>
-<li><p>Vary the hyperparameters such as mini-batch, number of epochs,… of the network for better approximation. Plot the learning curves as you make change to the network.</p></li>
+<li><p>Vary the hyperparameters such as mini-batch, number of epochs, penalty strength,… of the network for better approximation.</p></li>
+<li><p>Plot the learning curves as you make change to the network.</p></li>
 <li><p>Plot the fitted curve and compare to the true data above.</p></li>
+<li><p>Using the trained network to predict <span class="math inline">\(x\)</span> outside the domain <span class="math inline">\(D\)</span>, for example, on the interval <code>x_test = np.linspace(5,7,50)</code>. What do you observe?</p></li>
 </ul>
 <div id="cell-7" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This is an example with Keras</span></span>
@@ -237,7 +239,7 @@ if (outputEl) {{
 <p><strong>C.</strong> Increase the number of layers and observe the change in the network approximation power.</p>
 <ul>
 <li><p>Compare the approximation to the true function.</p></li>
-<li><p>Comment.</p></li>
+<li><p>Make outside domain prediction. Comment.</p></li>
 </ul>
 </section>
 <section id="heart-disease-dataset" class="level2">
