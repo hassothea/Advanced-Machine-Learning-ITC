@@ -10,6 +10,11 @@
     margin: 2px 0; /* Adjust the vertical space as needed */
 }
 
+.br10 {
+    display: block;
+    margin: -10px 0; /* Adjust the vertical space as needed */
+}
+
 .br1 {
     display: block;
     margin: 10px 0; /* Adjust the vertical space as needed */
