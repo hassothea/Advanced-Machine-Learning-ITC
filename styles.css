@@ -4,6 +4,89 @@
     margin-bottom: 5px;
 }
 
+/*
+.reveal {
+    font-size: 200%;
+  }
+*/
+
+.secbr {
+    display: block;
+    margin: 2px 0; /* Adjust the vertical space as needed */
+}
+
+.br1 {
+    display: block;
+    margin: 10px 0; /* Adjust the vertical space as needed */
+}
+
+.br10 {
+    display: block;
+    margin: -10px 0; /* Adjust the vertical space as needed */
+}
+
+.br20 {
+    display: block;
+    margin: -20px 0; /* Adjust the vertical space as needed */
+}
+
+.sbr {
+    display: block;
+    margin: -30px 0; /* Adjust the vertical space as needed */
+}
+
+.up {
+    display: block;
+    margin: -50px 0; /* Adjust the vertical space as needed */
+}
+
+.section{
+    font-size: 1.1em; /* Set the font size */
+    margin-top: 1px;  /* Set the space from the text above */
+    font-weight: 500;
+    color: #345a8b;
+}
+
+
+.red {
+    color: #b42121;
+}
+
+.white {
+    color: #ffffff;
+}
+
+.light-red {
+    color: #ee2c2c;
+}
+
+.blue {
+    color: #345a8b;
+}
+
+.light-blue {
+    color: #394ae0;
+}
+
+.orange{
+    color: #e2a555;
+}
+
+.green {
+    color: #15797A;
+}
+
+.darkgreen {
+    color: #095710;
+}
+
+.lightgreen {
+    color: #53a343;
+}
+
+.blur {
+    color: #dbdedf;
+}
 
 
 .br0 {
@@ -24,16 +107,4 @@
     background-color: rgba(255, 255, 255, 0.8); /* Optional: Add a background color with transparency */
     padding: 5px; /* Optional: Add some padding */
     border-radius: 5px; /* Optional: Add rounded corners */
-}
-
-
-img[src*='#left'] {
-    float: left;
-}
-img[src*='#right'] {
-    float: right;
-}
-img[src*='#center'] {
-    display: block;
-    margin: auto;
 }
