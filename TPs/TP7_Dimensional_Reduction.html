@@ -141,12 +141,12 @@ window.Quarto = {
 <p><strong>A. Dimensional reduction with PCA</strong></p>
 <ul>
 <li>Load the assembled data in the environment.</li>
-<li>Perform reduced/normalized PCA on this dataset. How many dimension should we keep to retain <span class="math inline">\(90\%\)</span> variation of the data?</li>
+<li>Perform reduced/normalized PCA on this dataset. How many dimensions should we keep to retain <span class="math inline">\(90\%\)</span> variation of the data?</li>
 <li>What’s the percentage of variance explained by the first two dimensions?</li>
 <li>Visualize the data in 2 dimensional space using <code>PCA</code>.</li>
-<li>Based on the resulting graph, would it better to work with the first two PCs (PC1 and PC2)?</li>
-<li>Perform clustering algorithm on these two PCs. Analyze the performance of clustering algorithm.</li>
-<li>Implement some select models using PC1 and PC2 as inputs to predict the type of satellite images and report their performances.</li>
+<li>Based on the resulting graph, would it be better to work with the first two PCs (PC1 and PC2)?</li>
+<li>Perform clustering algorithm on these two PCs. Analyze the performance of the clustering algorithm.</li>
+<li>Implement some predictive models using PC1 and PC2 as inputs to predict the type of satellite images and report their performances.</li>
 </ul>
 <div id="cell-5" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -154,9 +154,9 @@ window.Quarto = {
 <p><strong>B. Dimensional reduction with <span class="math inline">\(t\)</span>-SNE</strong></p>
 <ul>
 <li>Visualize the data in 2 dimensional space using <span class="math inline">\(t\)</span>-SNE.</li>
-<li>Based on the resulting graph, would it better to work with the embedded features by <span class="math inline">\(t\)</span>-SNE?</li>
-<li>Perform clustering algorithm on these embedded features. Analyze the performance of clustering algorithm.</li>
-<li>Implement some select models using the embedded features as inputs to predict the type of satellite images and report their performances.</li>
+<li>Based on the resulting graph, would it be better to work with the embedded features by <span class="math inline">\(t\)</span>-SNE?</li>
+<li>Perform clustering algorithm on these embedded features. Analyze the performance of the clustering algorithm.</li>
+<li>Implement some predictive models using the embedded features as inputs to predict the type of satellite images and report their performances.</li>
 </ul>
 <div id="cell-7" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -164,14 +164,14 @@ window.Quarto = {
 <p><strong>C. Dimensional reduction with Johnson-Lindenstrauss Lemma</strong></p>
 <ul>
 <li>Project images onto <span class="math inline">\(d=2, 5, 10\)</span> dimensional spaces (called them <code>X_JL2</code>, <code>X_JL5</code> and <code>X_JL10</code> respectively).</li>
-<li>Perform clustering algorithm on these projected data. Analyze the performance of clustering algorithm for each case.</li>
-<li>Implement some select models using the projected features as inputs to predict the type of satellite images and report their performances.</li>
+<li>Perform clustering algorithm on these projected data. Analyze the performance of the clustering algorithm for each case.</li>
+<li>Implement some predictive models using the projected features as inputs to predict the type of satellite images and report their performances.</li>
 </ul>
 <p><strong>D. Dimensional reduction with Autoencoder</strong></p>
 <ul>
 <li>Bulid autoencoder to encode and reconstruct satellite images using your own designed architecture.</li>
-<li>Visualize some of the original, embedded and reconstructed images side by side.</li>
-<li>Perform clustering algorithm on the latent images of the network. Analyze the performance of clustering algorithm for each case.</li>
+<li>Visualize some of the original, embedded, and reconstructed images side by side.</li>
+<li>Perform clustering algorithm on the latent images of the network. Analyze the performance of the clustering algorithm for each case.</li>
 <li>Implement some select models using the latent encoded images as inputs to predict the type of satellite images and report their performances.</li>
 </ul>
 </section>
