@@ -210,7 +210,7 @@ window.Quarto = {
 <p><strong>Lecturer</strong>: Sothea HAS, PhD</p>
 <p><strong>Objective:</strong> This practical session (TP) is designed to familiarize you with concept and application of Deep Neural Networks, which is a powerful model that is theoretically able to reconstruct any reasonably complex input-output relationship.</p>
 <ul>
-<li><p>The <code>notebook</code> of this <code>TP</code> can be downloaded here: <a href="https://hassothea.github.io/Advanced-Machine-Learning-ITC/TPs/Neural_Networks.html" target="_blank">TP_Neural_Network.ipynb</a>.</p></li>
+<li><p>The <code>notebook</code> of this <code>TP</code> can be downloaded here: <a href="https://hassothea.github.io/Advanced-Machine-Learning-ITC/TPs/Neural_Networks.ipynb" target="_blank">TP_Neural_Network.ipynb</a>.</p></li>
 <li><p>You can work directly in <code>Google Colab</code> here: <a href="https://colab.research.google.com/drive/1BhAtCwLZh_zVAlaZGRy0xiG4gOHZucRz?usp=sharing" target="_blank">TP_Neural_Network</a></p></li>
 </ul>
 <hr>
@@ -357,14 +357,14 @@ if (outputEl) {{
 <section id="mnist-dataset" class="level2">
 <h2 class="anchored" data-anchor-id="mnist-dataset"><strong>2. Mnist dataset</strong></h2>
 <p>In this section, you will work with <code>Mnist</code> dataset. It can be imported using the following codes.</p>
-<div id="cell-15" class="cell" data-execution_count="18">
+<div id="cell-15" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> keras.datasets <span class="im">import</span> mnist</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>(train_images, train_labels), (test_images, test_labels) <span class="op">=</span> mnist.load_data()</span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>digit <span class="op">=</span> np.random.choice(train_images.shape[<span class="dv">0</span>], size<span class="op">=</span><span class="dv">10</span>)</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>_ , axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">9</span>, <span class="dv">3</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>_ , axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  axs[i<span class="op">//</span><span class="dv">5</span>, i<span class="op">%</span><span class="dv">5</span>].imshow(train_images[digit[i]])</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  axs[i<span class="op">//</span><span class="dv">5</span>, i<span class="op">%</span><span class="dv">5</span>].axis(<span class="st">"off"</span>)</span>
@@ -380,11 +380,63 @@ if (outputEl) {{
 </div>
 </div>
 <ul>
-<li>Build your own designed DNN to identify the digits of testing images.</li>
-<li>Evaluate its performance using suitable matrix and conclude.</li>
+<li>Build your own designed DNN to identify the hand-written digit images.</li>
+<li>Evaluate its performance metric (accuracy, precision, recall and f1-score…) on the test data.</li>
+<li>Try to use different architectures and hyperparameters including learning rate, batchsize, optimization algorithm…</li>
 </ul>
-<div id="cell-17" class="cell" data-execution_count="5">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p><code>Hint</code>: Modify the codes shown in the <a href="https://hassothea.github.io/Advanced-Machine-Learning-ITC/courses/Neural_Network.html#/title-slide" target="_blank">course slide</a>.</p>
+<ul>
+<li>You can save your trained model for later use as follows:</li>
+</ul>
+<div id="cell-17" class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Save the trained model</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>model.save(<span class="st">'pretrained_mnist_model.h5'</span>)</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Model saved successfully."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="fashion-mnist-dataset" class="level2">
+<h2 class="anchored" data-anchor-id="fashion-mnist-dataset"><strong>3. <a href="https://www.kaggle.com/datasets/zalando-research/fashionmnist">Fashion Mnist</a> dataset</strong></h2>
+<p><code>Keras</code> offers another twin dataset to <code>Mnist</code> called <a href="https://www.kaggle.com/datasets/zalando-research/fashionmnist"><code>Fashion Mnist</code></a> that contains various types of Zalando’s article images (clothes, bags…). Your tasks is to develop DNN models to identify different articles contained in this dataset. The data can be loaded as follows.</p>
+<div id="cell-19" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Loading fashion mnist dataset</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> tensorflow.keras.datasets <span class="im">import</span> fashion_mnist</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>(X_train, y_train), (X_test, y_test) <span class="op">=</span> fashion_mnist.load_data()</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># Dimension</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Training data shape: </span><span class="sc">{</span>X_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Training labels shape: </span><span class="sc">{</span>y_train<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test data shape: </span><span class="sc">{</span>X_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Test labels shape: </span><span class="sc">{</span>y_test<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Class names</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>class_names <span class="op">=</span> [<span class="st">'T-shirt/top'</span>, <span class="st">'Trouser'</span>, <span class="st">'Pullover'</span>, <span class="st">'Dress'</span>, <span class="st">'Coat'</span>,</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>               <span class="st">'Sandal'</span>, <span class="st">'Shirt'</span>, <span class="st">'Sneaker'</span>, <span class="st">'Bag'</span>, <span class="st">'Ankle boot'</span>]</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="co"># Visualization</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>id_random <span class="op">=</span> np.random.choice(X_train.shape[<span class="dv">0</span>], size<span class="op">=</span><span class="dv">10</span>)</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>_ , axs <span class="op">=</span> plt.subplots(<span class="dv">2</span>,<span class="dv">5</span>, figsize<span class="op">=</span>(<span class="dv">12</span>, <span class="dv">6</span>))</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(<span class="dv">10</span>):</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  axs[i<span class="op">//</span><span class="dv">5</span>, i<span class="op">%</span><span class="dv">5</span>].imshow(X_train[id_random[i]])</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  axs[i<span class="op">//</span><span class="dv">5</span>, i<span class="op">%</span><span class="dv">5</span>].axis(<span class="st">"off"</span>)</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  axs[i<span class="op">//</span><span class="dv">5</span>, i<span class="op">%</span><span class="dv">5</span>].set_title(<span class="ss">f"True article: </span><span class="sc">{</span>class_names[y_train[id_random[i]]]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Training data shape: (60000, 28, 28)
+Training labels shape: (60000,)
+Test data shape: (10000, 28, 28)
+Test labels shape: (10000,)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="TP_Neural_Network_files/figure-html/cell-9-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="cell-20" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># To do</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="references" class="level1">
