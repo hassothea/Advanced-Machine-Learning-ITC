@@ -1,4 +1,4 @@
-# **Advanced Machine Learning **
+# Advanced Machine Learning
 
 <img src="./img/AMS_logo.png#right" style="width:0.69444in" /> 
 <img src="./img/itc.png#left"
