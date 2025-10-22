@@ -55,7 +55,7 @@ problems.
 
 # 📋 Course session
 
-> **Visit the course webpage:** <a href="https://hassothea.github.io/Advanced-Machine-Learning-ITC/" target="_blank">M1-DAS: EDA & Unsupervised Learning</a>
+> **Visit the course webpage:** <a href="https://hassothea.github.io/Advanced-Machine-Learning-ITC/" target="_blank">M1-DAS: Advanced Machine Learning</a>
 
 # Midterms, Exams and Projects
 
