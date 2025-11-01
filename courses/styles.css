@@ -30,7 +30,27 @@
     margin: -20px 0; /* Adjust the vertical space as needed */
 }
 
+.br30 {
+    display: block;
+    margin: -30px 0; /* Adjust the vertical space as needed */
+}
+
+.br40 {
+    display: block;
+    margin: -40px 0; /* Adjust the vertical space as needed */
+}
+
 .sbr {
+    display: block;
+    margin: -30px 0; /* Adjust the vertical space as needed */
+}
+
+.skip {
+    display: block;
+    margin: -22.5px 0; /* Adjust the vertical space as needed */
+}
+
+.vspace4 {
     display: block;
     margin: -30px 0; /* Adjust the vertical space as needed */
 }
@@ -44,7 +64,7 @@
     font-size: 1.1em; /* Set the font size */
     margin-top: 1px;  /* Set the space from the text above */
     font-weight: 500;
-    color: #345a8b;
+    color: #227494; /* #3f7ad4; */
 }
 
 
@@ -69,7 +89,7 @@
 }
 
 .orange{
-    color: #e2a555;
+    color: #dd8e1f;
 }
 
 .green {
@@ -77,7 +97,7 @@
 }
 
 .darkgreen {
-    color: #095710;
+    color: #134849ff;
 }
 
 .lightgreen {
