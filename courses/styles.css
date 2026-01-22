@@ -60,6 +60,26 @@
     margin: -50px 0; /* Adjust the vertical space as needed */
 }
 
+.up1 {
+    display: block;
+    margin: -10px 0; /* Adjust the vertical space as needed */
+}
+
+.up2 {
+    display: block;
+    margin: -20px 0; /* Adjust the vertical space as needed */
+}
+
+.up3 {
+    display: block;
+    margin: -30px 0; /* Adjust the vertical space as needed */
+}
+
+.up4 {
+    display: block;
+    margin: -40px 0; /* Adjust the vertical space as needed */
+}
+
 .section{
     font-size: 1.1em; /* Set the font size */
     margin-top: 1px;  /* Set the space from the text above */
